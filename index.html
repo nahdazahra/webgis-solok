@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SSL</title>
+    	<link rel="stylesheet" type="text/css" href="style.css">
+    	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAxgh83y8vSI1-91nTOTDiUfQUmWmpcfRU"></script>
+   		<!-- <script src="maps.js"></script> -->
+  	</head>
+  	<body>
+	    <div class="wrap" >
+      		<div class="header">     
+       			<h1><center>Peta Zona Nilai Tanah Kota Solok</center></h1>
+     		</div>
+	     	<div class="body-content" style="height: 800px" >
+		       	<div class="sidebar" style="width: 25%; background-color: #fff">
+			        <div class="container">
+			        	<br>
+				        <div class="cari-nama">
+				        	<input type="submit" value="Search" style="float: right; width: 24%" id="btnfind" name="" class="btn-success form-control">
+				        	<div style="overflow: hidden; ">
+				        		<input type="text" style="width: 98%;" list="kelurahan" id="inputname" name="" class="form-control" placeholder="Kelurahan">
+						    	<datalist id="kelurahan">
+						      	</datalist>
+				        	</div>
+				        </div>
+				        <div id="listdata" style="background:white; height: auto; overflow: auto;"></div>
+<!-- 
+				        <hr>
+
+				        <div class="form-check">
+				        	<input type="checkbox" class="form-check-input" id="wisata_tobasa">
+				        	<label class="form-check-label">Show All Loperman's Location</label>
+				        </div>
+ -->
+				        <hr>
+
+				        <div>
+				        	<b>Choose Layer : </b>
+				        	<form>
+						      	<input type="checkbox" name="layer" value="1">Zona Nilai Tanah<br>
+						      	<input type="checkbox" name="layer" value="2">Persil<br>
+				        	</form>
+				        </div>
+
+				        <div>
+				        	<!-- <div style="padding-top: 10px">
+						    <b>Start:</b>
+						    <input list="start" id="starts" class="form-control">
+						    	<datalist id="start">
+						      	</datalist>
+						    </div>
+
+						    <div style="padding-top: 10px">
+						    	<b>Waypoints:</b> <br>
+							    <i>(Ctrl+Click for multiple selection)</i> <br>
+							    <select multiple id="waypoints" class="form-control">
+							    </select>
+						    </div>
+
+						    <div style="padding-top: 10px">
+						    <b>End:</b>
+						    <input list="end" id="ends" class="form-control">
+						    	<datalist id="end">							      
+						      	</datalist>
+						    </div> -->
+
+						    <div style="padding-top: 15px; float: right;">
+						    	<input type="submit" id="submit" class="btn-primary form-control" style="width: 100%">
+						    </div>
+						</div>
+			        </div>
+		       	</div>
+		       	
+		       	<div id="map" style="width: 75%;">
+		        	Map
+		       	</div>
+     		</div>
+     		<div id="latlong">
+     			<input id="Informatika" type="hidden" data-lat="-0.7899183", data-long="100.6445636">
+     		</div>
+
+	     	<div class="footer">
+	     		<script type="text/javascript" src="js/bootstrap.js"></script>
+				<script src="js/jquery-3.3.1.min.js"></script>
+				<script type="">
+					$('#route').change(function() {
+						var route = $(this).val();
+						$.ajax({
+							url : 'showwaypoint.php', //goes to php for getting kelurahan
+							data : {'routes': route},
+							type : 'POST',
+							dataType : 'json',
+							success: function(data){
+								$('#kelurahan').empty();
+								$('#latlong').not(':first').empty();
+
+								console.log(data);
+								$.each(data, function(i, val){
+									$('#kelurahan').append('<option value="'+val['nama']+'"></option>');
+									
+									$('#latlong').append('<input id="'+val['nama']+'" type="hidden" data-lat="'+val['latitude']+'" data-long="'+val['longitude']+'">');
+								})
+							}
+						})
+					});
+					$('#route').change();
+				</script>
+
+				<script type="text/javascript">
+					function initialize() {
+						var mapOptions = {
+							center: {lat: -0.7899183, lng: 100.6445636}, zoom: 15
+						};
+						map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+						//nampilin pin2nya --> ganti ke pilih layer
+						function show_wisata_tobasa(){
+							wisata_tobasa = new google.maps.Data();
+							wisata_tobasa.loadGeoJson('geojson.php');
+							wisata_tobasa.setMap(map);
+							info_wisata_tobasa = new google.maps.InfoWindow();
+							wisata_tobasa.addListener('click', function(e) {
+								info_wisata_tobasa.close();
+								var nama = e.feature.getProperty('nama');
+								info_wisata_tobasa.setContent("<b>Nama</b> : "+nama);
+								info_wisata_tobasa.setPosition(e.latLng);
+								info_wisata_tobasa.setOptions({pixelOffset: new google.maps.Size(0,-35)});
+								info_wisata_tobasa.open(map);
+							});
+						}
+						function toggle_wisata_tobasa(){
+							if (typeof wisata_tobasa.setMap == 'function') {
+								if (document.getElementById("wisata_tobasa").checked == true) {
+									wisata_tobasa.setMap(map);
+								}
+								else {
+									wisata_tobasa.setMap(null);
+								}
+							}
+							else{
+								if (document.getElementById("wisata_tobasa").checked == true) {
+									show_wisata_tobasa();
+								}
+							}
+						}
+						document.getElementById("wisata_tobasa").addEventListener("change", toggle_wisata_tobasa);
+
+						resultmarker = [];
+						function findname(){
+							for (var i = 0; i < resultmarker.length; i++){
+								resultmarker[i].setMap(null);
+							}
+							resultmarker = [];
+
+							if(inputname.value==''){
+								alert("The column should not be blank!");
+							}
+						
+							else{
+								document.getElementById("listdata").innerHTML = "";
+								var xmlhttp = new XMLHttpRequest();
+								var url = "findname.php?q="+inputname.value;
+								xmlhttp.onreadystatechange = function() {
+									if (this.readyState == 4 && this.status == 200) {
+										var arr = JSON.parse(this.responseText);
+										if(arr == null){
+											alert('Data does not exist!');
+											return;
+										}
+										var i;
+
+										for(i = 0; i < arr.length; i++) {
+											gid=arr[i].gid,
+											nama=arr[i].nama,
+											latitude=arr[i].latitude,
+											longitude=arr[i].longitude;
+											newcenter=new google.maps.LatLng(latitude, longitude);
+											marker=new google.maps.Marker({
+												position: newcenter, map: map, animation: google.maps.Animation.DROP
+											});
+											resultmarker.push(marker);
+											map.setZoom(13);
+											map.setCenter(newcenter);
+											createInfoWindow(marker, gid, nama);
+											document.getElementById("listdata").innerHTML += "<li id="+gid+" onclick='showdetail(this.id)'>"+nama+"</li>";
+										}
+									}
+								};
+								xmlhttp.open("GET", url, true);
+								xmlhttp.send();
+							}
+						}
+
+						function createInfoWindow(marker, gid, nama){
+							infowindow = new google.maps.InfoWindow();
+							google.maps.event.addListener(marker, 'click', function(){
+								infowindow.close();
+								infowindow.setContent("<b>Nama</b> : "+nama);
+								infowindow.open(map, marker);
+							});
+						}
+
+						document.getElementById("btnfind").addEventListener("click", findname);
+						document.getElementById("inputname").addEventListener("keyup", function(event){
+							if (event.keyCode==13){
+								btnfindname();
+							}
+						});
+
+						var directionsService = new google.maps.DirectionsService;
+						var directionsDisplay = new google.maps.DirectionsRenderer;
+						directionsDisplay.setMap(map);
+
+						document.getElementById('submit').addEventListener('click', function() {
+							// directionsDisplay.setMap(null);
+							// directionsDisplay.setDirections(null);
+						  	calculateAndDisplayRoute(directionsService, directionsDisplay);
+						});
+
+						function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+							console.log('hai');
+							var waypts = [];
+							var checkboxArray = document.getElementById('waypoints');
+							for (var i = 0; i < checkboxArray.length; i++) {
+							  if (checkboxArray.options[i].selected) {
+							  	var poin1 = checkboxArray[i].getAttribute('data-lat');
+							  	var poin2 = checkboxArray[i].getAttribute('data-long');
+							  	// console.log(poin);
+							    waypts.push({
+							      location: new google.maps.LatLng(poin1, poin2),
+							      stopover: true
+							    });
+							  }
+							}
+							var kelurahan = document.getElementById('inputname').value;
+							var end = document.getElementById('ends').value;
+							console.log(kelurahan, end);
+							var latlong1 = document.getElementById(kelurahan).getAttribute('data-lat')+', '+document.getElementById(kelurahan).getAttribute('data-long');
+							var latlong2 =document.getElementById(end).getAttribute('data-lat')+', '+document.getElementById(end).getAttribute('data-long');
+							console.log(latlong1, latlong2);
+							console.log(waypts);
+
+
+							directionsService.route({
+							  origin: latlong1,
+							  destination: latlong2,
+							  waypoints: waypts,
+							  optimizeWaypoints: true,
+							  travelMode: 'DRIVING'
+							}, function(response, status) {
+							  if (status === 'OK') {
+							  	console.log(response, status);
+							    directionsDisplay.setDirections(response);
+							    var route = response.routes[0];
+							    
+							  } else {
+							    window.alert('Directions request failed due to ' + status);
+							  }
+							});
+						}
+					}
+					google.maps.event.addDomListener(window, 'load', initialize);
+
+
+				</script>
+	       		Footer
+	    	</div>
+   		</div>
+	</body>
+</html>
