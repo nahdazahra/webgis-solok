@@ -1,8 +1,8 @@
 <?php
 	$host = "localhost";
 	$user = "postgres";
-	$pass = "56789";
+	$pass = "nahda";
 	$port = "5432";
-	$dbname = "loperman";
+	$dbname = "webgis-solok";
 	$conn = pg_connect("host=".$host." port=".$port."  dbname=".$dbname." user=".$user." password=".$pass) or  die("Koneksi gagal");
 ?>

@@ -1,7 +1,7 @@
 <?php
 	header('Content-Type: application/json');
 	require('config.php');
-	$sql="SELECT st_asgeojson(loc.geom) As geometry, gid, nama FROM titik As loc";
+	$sql="SELECT st_asgeojson(area.geom) As geometry, gid, nama FROM znt_desa As area";
 	$geojson = array(
 		'type' => 'FeatureCollection',
 		'features' => array()

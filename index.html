@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>SSL</title>
+		<title>Zona Nilai Tanah Kota Solok</title>
     	<link rel="stylesheet" type="text/css" href="style.css">
     	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAxgh83y8vSI1-91nTOTDiUfQUmWmpcfRU"></script>
-   		<!-- <script src="maps.js"></script> -->
   	</head>
   	<body>
 	    <div class="wrap" >
@@ -19,38 +18,33 @@
 				        <div class="cari-nama">
 				        	<input type="submit" value="Search" style="float: right; width: 24%" id="btnfind" name="" class="btn-success form-control">
 				        	<div style="overflow: hidden; ">
-				        		<input type="text" style="width: 98%;" list="kelurahan" id="inputname" name="" class="form-control" placeholder="Kelurahan">
-						    	<datalist id="kelurahan">
+				        		<input type="text" style="width: 98%;" list="find" id="inputname" name="" class="form-control" placeholder="Pilih Kecamatan">
+				        		<datalist id="find">
+				        			<option value="Lubuk Sikarah"></option>
+				        			<option value="Tanjung Harapan"></option>
 						      	</datalist>
 				        	</div>
 				        </div>
 				        <div id="listdata" style="background:white; height: auto; overflow: auto;"></div>
-<!-- 
+
 				        <hr>
 
 				        <div class="form-check">
-				        	<input type="checkbox" class="form-check-input" id="wisata_tobasa">
-				        	<label class="form-check-label">Show All Loperman's Location</label>
+				        	<input type="checkbox" class="form-check-input" id="zona_tanah">
+				        	<label class="form-check-label">Lihat seluruh zona tanah</label>
 				        </div>
- -->
+
 				        <hr>
 
-				        <div>
-				        	<b>Choose Layer : </b>
-				        	<form>
-						      	<input type="checkbox" name="layer" value="1">Zona Nilai Tanah<br>
-						      	<input type="checkbox" name="layer" value="2">Persil<br>
-				        	</form>
-				        </div>
-
-				        <div>
-				        	<!-- <div style="padding-top: 10px">
-						    <b>Start:</b>
+								<div>
+				        	<div style="padding-top: 10px">
+						    <b>Desa/Kelurahan :</b>
 						    <input list="start" id="starts" class="form-control">
 						    	<datalist id="start">
 						      	</datalist>
 						    </div>
 
+<!-- 
 						    <div style="padding-top: 10px">
 						    	<b>Waypoints:</b> <br>
 							    <i>(Ctrl+Click for multiple selection)</i> <br>
@@ -77,35 +71,46 @@
 		       	</div>
      		</div>
      		<div id="latlong">
-     			<input id="Informatika" type="hidden" data-lat="-0.7899183", data-long="100.6445636">
+     			<input id="Informatika" type="hidden" data-lat="-7.279800" data-long="112.797674">
      		</div>
 
 	     	<div class="footer">
-	     		<script type="text/javascript" src="js/bootstrap.js"></script>
-				<script src="js/jquery-3.3.1.min.js"></script>
-				<script type="">
+	     	<script type="text/javascript" src="js/bootstrap.js"></script>
+				<script src="jquery-3.3.1.min.js"></script>
+				<!-- <script type="">
 					$('#route').change(function() {
 						var route = $(this).val();
 						$.ajax({
-							url : 'showwaypoint.php', //goes to php for getting kelurahan
+							url : 'showwaypoint.php',
 							data : {'routes': route},
 							type : 'POST',
 							dataType : 'json',
 							success: function(data){
-								$('#kelurahan').empty();
-								$('#latlong').not(':first').empty();
+								$('#start').empty();
+								// $('#waypoints').empty();
+								// $('#end').empty();
+								// $('#latlong').not(':first').empty();
 
+								// $('#start').append('<option value="Informatika">Informatika</option>');
+								// $('#end').append('<option value="Informatika">Informatika</option>');
+
+								// window.lat={};
 								console.log(data);
 								$.each(data, function(i, val){
-									$('#kelurahan').append('<option value="'+val['nama']+'"></option>');
-									
-									$('#latlong').append('<input id="'+val['nama']+'" type="hidden" data-lat="'+val['latitude']+'" data-long="'+val['longitude']+'">');
+									$('#start').append('<option value="'+val['nama']+'"></option>');
+									// $('#waypoints').append('<option value="'+val['nama']+'" data-lat="'+val['latitude']+'" data-long="'+val['longitude']+'">'+val['nama']+'</option>');
+									// $('#end').append('<option value="'+val['nama']+'"></option>');
+									// $('#latlong').append('<input id="'+val['nama']+'" type="hidden" data-lat="'+val['latitude']+'" data-long="'+val['longitude']+'">');
+									// var lat.push(val['latlong']);
+									// window.lat[val['nama']]=val['latlong'];
 								})
 							}
 						})
 					});
 					$('#route').change();
-				</script>
+
+					
+				</script> -->
 
 				<script type="text/javascript">
 					function initialize() {
@@ -113,38 +118,36 @@
 							center: {lat: -0.7899183, lng: 100.6445636}, zoom: 15
 						};
 						map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-						//nampilin pin2nya --> ganti ke pilih layer
-						function show_wisata_tobasa(){
-							wisata_tobasa = new google.maps.Data();
-							wisata_tobasa.loadGeoJson('geojson.php');
-							wisata_tobasa.setMap(map);
-							info_wisata_tobasa = new google.maps.InfoWindow();
-							wisata_tobasa.addListener('click', function(e) {
-								info_wisata_tobasa.close();
+						function show_zona_tanah(){
+							zona_tanah = new google.maps.Data();
+							zona_tanah.loadGeoJson('geojson.php');
+							zona_tanah.setMap(map);
+							info_zona_tanah = new google.maps.InfoWindow();
+							zona_tanah.addListener('click', function(e) {
+								info_zona_tanah.close();
 								var nama = e.feature.getProperty('nama');
-								info_wisata_tobasa.setContent("<b>Nama</b> : "+nama);
-								info_wisata_tobasa.setPosition(e.latLng);
-								info_wisata_tobasa.setOptions({pixelOffset: new google.maps.Size(0,-35)});
-								info_wisata_tobasa.open(map);
+								info_zona_tanah.setContent("<b>Nama</b> : "+nama);
+								info_zona_tanah.setPosition(e.latLng);
+								info_zona_tanah.setOptions({pixelOffset: new google.maps.Size(0,-35)});
+								info_zona_tanah.open(map);
 							});
 						}
-						function toggle_wisata_tobasa(){
-							if (typeof wisata_tobasa.setMap == 'function') {
-								if (document.getElementById("wisata_tobasa").checked == true) {
-									wisata_tobasa.setMap(map);
+						function toggle_zona_tanah(){
+							if (typeof zona_tanah.setMap == 'function') {
+								if (document.getElementById("zona_tanah").checked == true) {
+									zona_tanah.setMap(map);
 								}
 								else {
-									wisata_tobasa.setMap(null);
+									zona_tanah.setMap(null);
 								}
 							}
 							else{
-								if (document.getElementById("wisata_tobasa").checked == true) {
-									show_wisata_tobasa();
+								if (document.getElementById("zona_tanah").checked == true) {
+									show_zona_tanah();
 								}
 							}
 						}
-						document.getElementById("wisata_tobasa").addEventListener("change", toggle_wisata_tobasa);
+						document.getElementById("zona_tanah").addEventListener("change", toggle_zona_tanah);
 
 						resultmarker = [];
 						function findname(){
@@ -212,53 +215,55 @@
 						var directionsDisplay = new google.maps.DirectionsRenderer;
 						directionsDisplay.setMap(map);
 
-						document.getElementById('submit').addEventListener('click', function() {
-							// directionsDisplay.setMap(null);
-							// directionsDisplay.setDirections(null);
-						  	calculateAndDisplayRoute(directionsService, directionsDisplay);
-						});
+						// document.getElementById('submit').addEventListener('click', function() {
+						// 	// directionsDisplay.setMap(null);
+						// 	// directionsDisplay.setDirections(null);
+						//   	calculateAndDisplayRoute(directionsService, directionsDisplay);
+						// });
 
-						function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-							console.log('hai');
-							var waypts = [];
-							var checkboxArray = document.getElementById('waypoints');
-							for (var i = 0; i < checkboxArray.length; i++) {
-							  if (checkboxArray.options[i].selected) {
-							  	var poin1 = checkboxArray[i].getAttribute('data-lat');
-							  	var poin2 = checkboxArray[i].getAttribute('data-long');
-							  	// console.log(poin);
-							    waypts.push({
-							      location: new google.maps.LatLng(poin1, poin2),
-							      stopover: true
-							    });
-							  }
-							}
-							var kelurahan = document.getElementById('inputname').value;
-							var end = document.getElementById('ends').value;
-							console.log(kelurahan, end);
-							var latlong1 = document.getElementById(kelurahan).getAttribute('data-lat')+', '+document.getElementById(kelurahan).getAttribute('data-long');
-							var latlong2 =document.getElementById(end).getAttribute('data-lat')+', '+document.getElementById(end).getAttribute('data-long');
-							console.log(latlong1, latlong2);
-							console.log(waypts);
+						// function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+						// 	console.log('hai');
+						// 	var waypts = [];
+						// 	var checkboxArray = document.getElementById('waypoints');
+						// 	for (var i = 0; i < checkboxArray.length; i++) {
+						// 	  if (checkboxArray.options[i].selected) {
+						// 	  	var poin1 = checkboxArray[i].getAttribute('data-lat');
+						// 	  	var poin2 = checkboxArray[i].getAttribute('data-long');
+						// 	  	// console.log(poin);
+						// 	    waypts.push({
+						// 	      location: new google.maps.LatLng(poin1, poin2),
+						// 	      stopover: true
+						// 	    });
+						// 	  }
+						// 	}
+						// 	// var start = $('#start option:selected').attr('value');
+						// 	// var end = $('#end option:selected').attr('value');
+						// 	var start = document.getElementById('starts').value;
+						// 	var end = document.getElementById('ends').value;
+						// 	console.log(start, end);
+						// 	var latlong1 = document.getElementById(start).getAttribute('data-lat')+', '+document.getElementById(start).getAttribute('data-long');
+						// 	var latlong2 =document.getElementById(end).getAttribute('data-lat')+', '+document.getElementById(end).getAttribute('data-long');
+						// 	console.log(latlong1, latlong2);
+						// 	console.log(waypts);
 
 
-							directionsService.route({
-							  origin: latlong1,
-							  destination: latlong2,
-							  waypoints: waypts,
-							  optimizeWaypoints: true,
-							  travelMode: 'DRIVING'
-							}, function(response, status) {
-							  if (status === 'OK') {
-							  	console.log(response, status);
-							    directionsDisplay.setDirections(response);
-							    var route = response.routes[0];
+						// 	directionsService.route({
+						// 	  origin: latlong1,
+						// 	  destination: latlong2,
+						// 	  waypoints: waypts,
+						// 	  optimizeWaypoints: true,
+						// 	  travelMode: 'DRIVING'
+						// 	}, function(response, status) {
+						// 	  if (status === 'OK') {
+						// 	  	console.log(response, status);
+						// 	    directionsDisplay.setDirections(response);
+						// 	    var route = response.routes[0];
 							    
-							  } else {
-							    window.alert('Directions request failed due to ' + status);
-							  }
-							});
-						}
+						// 	  } else {
+						// 	    window.alert('Directions request failed due to ' + status);
+						// 	  }
+						// 	});
+						// }
 					}
 					google.maps.event.addDomListener(window, 'load', initialize);
 
