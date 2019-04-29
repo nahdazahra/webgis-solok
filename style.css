@@ -1,12 +1,9 @@
+
 .wrap{
+  height: auto;
   width: 100%;
-  border: solid 1px;
   margin: 0 auto;
-}
-.wrap .header{
-  /*background: azure;*/
-  border-bottom: solid 1px;
-  padding: 1px 0;
+  overflow: hidden;
 }
 .body-content{
   height: 100%;
@@ -15,16 +12,15 @@
 .wrap .body-content .sidebar{
   /*background-color: white;*/
   float: left;
-  width: 40%;
+  width: 25%;
   height: 100%;
 }
 .wrap .body-content #map{
   float: left;
   height: 100%;
-  width: 60%; 
 }
-.wrap .footer{
-  /*background: FloralWhite;*/
+/* .wrap .footer{
+  background: FloralWhite;
   border-top: solid 1px;
   padding: 1px 0;
-}
+} */

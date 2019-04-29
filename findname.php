@@ -8,7 +8,7 @@
 	elseif ($q=="TANJUNG HARAPAN") {
 		$q=2;
 	}
-	$querysearch="SELECT gid,nama,ST_Area(geom) As area FROM znt_desa where obj_id ='$q' ";
+	$querysearch="SELECT gid,nama, st_astext(geom) as area FROM public.znt_desa where obj_id ='$q'";
 	$hasil=pg_query($querysearch);
 	while($row = pg_fetch_array($hasil)){
 		$gid=$row['gid'];
