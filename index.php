@@ -13,10 +13,14 @@
     <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script src="script.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAxgh83y8vSI1-91nTOTDiUfQUmWmpcfRU&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
-
+		
+		<script src="https://underscorejs.org/underscore.js"></script>
+		<script src="https://unpkg.com/terraformer@1.0.8"></script>
+		<script src="https://unpkg.com/terraformer-arcgis-parser@1.0.5"></script>
+		<script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
 	</head>
 	<body onload="up206b.initialize()">
-		<div class="wrap" style="height: 1000px">
+		<div class="wrap" style="height: 800px">
 			<nav class="navbar-default" role="navigation">
 				<div class="container-fluid">
 					<div class="navbar-header">
@@ -140,7 +144,7 @@
 								</datalist>
 							</div>
 						</div>
-						<div id="listdata" style="background:white; height: auto; overflow: auto;"></div>
+						<!-- <div id="listdata" style="background:white; height: auto; overflow: auto;"></div> -->
 
 						<hr>
 
@@ -154,8 +158,8 @@
 						<div>
 							<div style="padding-top: 10px">
 								<b>Desa/Kelurahan :</b>
-								<input list="start" id="starts" class="form-control">
-									<datalist id="start">
+								<input list="listdata" id="starts" class="form-control" onchange="getArea()">
+									<datalist id="listdata">
 									</datalist>
 							</div>
 							<div style="padding-top: 15px; float: right;">
@@ -169,6 +173,83 @@
 				Map here
 			</div>
 
+			<script>
+				var fillIdx = 0;
+				var fills = [
+				'#22A164',
+				'#00005E',
+				'#3C0D68',
+				'#FB3837',
+				'#22A164',
+				];
+				
+				google.maps.Polygon.prototype.getBounds = function() {
+					var bounds = new google.maps.LatLngBounds();
+					var paths = this.getPaths();
+					var path;        
+					for (var i = 0; i < paths.getLength(); i++) {
+						path = paths.getAt(i);
+						for (var ii = 0; ii < path.getLength(); ii++) {
+							bounds.extend(path.getAt(ii));
+						}
+					}
+					return bounds;
+				}
+
+				var transform = function(multipolygon) {
+				var geojson = ''
+				try {
+					var geojson = Terraformer.WKT.parse(multipolygon)
+					geojson = geojson.toGeographic()
+				}
+				catch (e) {
+					geojson = e;
+					console.log('except');
+				}
+				
+				// $('#output').val(JSON.stringify(geojson, undefined, 2));
+				// console.log(multipolygon);
+				console.log(JSON.stringify(geojson, undefined, 2));
+				var bounds = new google.maps.LatLngBounds();
+				
+				var paths = _.map(geojson.coordinates, function(entry) {
+					return _.reduce(entry, function(list, polygon) {
+					// This map() only transforms the data.
+					_.each(_.map(polygon, function(point) {
+						// Important: the lat/lng are vice-versa in GeoJSON
+						return new google.maps.LatLng(point[1], point[0]);
+					}), function(point) {
+						list.push(point);
+					});
+
+					return list;
+					}, []);
+				});
+
+				fillIdx = (fillIdx >= fills.length) ? 0 : fillIdx + 1;
+
+				var polygon = new google.maps.Polygon({
+					paths: paths,
+					strokeWeight: 0,
+					fillColor: fills[fillIdx],
+					fillOpacity: 0.35
+				});
+
+				console.log(polygon);
+				return polygon;
+				};
+
+				$(function() {
+					$(this).on('click', '#sample-wkt', function(e) {
+						$.get('https://s3-us-west-2.amazonaws.com/s.cdpn.io/44521/sample_wkt_1.txt', function(data) {
+						$('#wkt')
+							.val(data)
+							.trigger('change');      
+						})
+					})
+				})
+			</script>
+			
 			<script type="text/javascript">
 				//declare namespace
 				var up206b = {};
@@ -195,11 +276,28 @@
 					};
 					map = new google.maps.Map(document.getElementById("map"), myOptions);
 				}
+
+				var getArea = function(){
+						$.ajax({
+								url: "common.php?q="+inputname.value+"&desa="+starts.value,
+								dataType: 'json',
+								method: 'GET',
+								error: function(data){
+									alert('Data does not exist!');
+									return;
+								},
+								success: function(data){
+									map.setMap(NULL);
+								}
+							});
+					}
+					
 				function initialize() {
+					
 					function show_zona_tanah(){
 						zona_tanah = new google.maps.Data();
 						zona_tanah.addGeoJson('geojson.php');
-						zona_tanah.setMap(map);
+						// zona_tanah.setMap(map);
 					}
 					function toggle_zona_tanah(){
 						if (typeof zona_tanah.setMap == 'function') {
@@ -216,10 +314,12 @@
 							}
 						}
 					}
+					
 					document.getElementById("zona_tanah").addEventListener("change", toggle_zona_tanah);
 
 					resultmarker = [];
 					
+
 					function findname(){
 						for (var i = 0; i < resultmarker.length; i++){
 							resultmarker[i].setMap(null);
@@ -229,41 +329,77 @@
 						if(inputname.value==''){
 							alert("The column should not be blank!");
 						}
-					
 						else{
 							document.getElementById("listdata").innerHTML = "";
-							var xmlhttp = new XMLHttpRequest();
-							var url = "findname.php?q="+inputname.value;
-							xmlhttp.onreadystatechange = function() {
-								if (this.readyState == 4 && this.status == 200) {
-									var arr = JSON.parse(this.responseText);
-									if(arr == null){
-										alert('Data does not exist!');
-										return;
-									}
+							$.ajax({
+								url: "common.php?q="+inputname.value,
+								dataType: 'json',
+								method: 'GET',
+								error: function(data){
+									alert('Data does not exist!');
+									return;
+								},
+								success: function(data){
+									document.getElementById("listdata").innerHTML="";
 									var i;
-
-									for(i = 0; i < arr.length; i++) {
-										gid=arr[i].gid,
-										nama=arr[i].nama,
-										luas=arr[i].luas,
+									for(i = 0; i < data['list'].length; i++) {
 										// newcenter=new google.maps.LatLng(latitude, longitude);
-										marker=new google.maps.Marker({
-											position: newcenter, map: map, animation: google.maps.Animation.DROP
-										});
+										// marker=new google.maps.Marker({
+										// 	position: newcenter, map: map, animation: google.maps.Animation.DROP
+										// });
 										// resultmarker.push(marker);
 										// map.setZoom(13);
 										// map.setCenter(newcenter);
 										// createInfoWindow(marker, gid, nama);
-										document.getElementById("listdata").innerHTML += "<li id="+gid+" onclick='showdetail(this.id)'>"+nama+"</li>";
+										var polygon=transform(data['list'][i]['area']);
+										polygon.setMap(map);
 									}
+
+									for (i=0; i<data['nama'].length; i++) {
+										nama=data['nama'][i].nama;
+										document.getElementById("listdata").innerHTML += "<option value='"+nama+"'>";
+									}
+									map.fitBounds(polygon.getBounds());
 								}
-							};
-							xmlhttp.open("GET", url, true);
-							xmlhttp.send();
+							});
+							// var xmlhttp = new XMLHttpRequest();
+							// var url = "common.php?q="+inputname.value;
+							// xmlhttp.onreadystatechange = function() {
+							// 	if (this.readyState == 4 && this.status == 200) {
+							// 		var arr = JSON.parse(this.responseText);
+							// 		if(arr == null){
+							// 			alert('Data does not exist!');
+							// 			return;
+							// 		}
+							// 		var i;
+
+							// 		for(i = 0; i < arr['list'].length; i++) {
+							// 			// newcenter=new google.maps.LatLng(latitude, longitude);
+							// 			// marker=new google.maps.Marker({
+							// 			// 	position: newcenter, map: map, animation: google.maps.Animation.DROP
+							// 			// });
+							// 			// resultmarker.push(marker);
+							// 			// map.setZoom(13);
+							// 			// map.setCenter(newcenter);
+							// 			// createInfoWindow(marker, gid, nama);
+							// 			var polygon=transform(arr[i]['area']);
+							// 			polygon.setMap(map);
+							// 		}
+
+							// 		for (i=0; i<arr['nama'].length; i++) {
+							// 			nama=arr[i].nama;
+							// 			document.getElementById("listdata").innerHTML += "<li onclick='showdetail(this.id)'>"+nama+"</li>";
+							// 		}
+							// 		map.fitBounds(polygon.getBounds());
+							// 	}
+							// };
+							// xmlhttp.open("GET", url, true);
+							// xmlhttp.send();
 						}
 					}
+
 					
+
 					function createInfoWindow(marker, gid, nama){
 						infowindow = new google.maps.InfoWindow();
 						google.maps.event.addListener(marker, 'click', function(){

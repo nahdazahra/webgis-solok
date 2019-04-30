@@ -69,45 +69,33 @@
 								<input type="submit" id="submit" class="btn-primary form-control" style="width: 100%">
 							</div>
 						</div>
-						<div>
-							<form action="update.php">
 
+						<hr>
+
+						<div class="form" name="form-update" style="padding-top: 10px">
+							<form method="post" action="update.php">
+								<div class="form-group">
+									<label for="name">Kecamatan </label>
+									<input type="text" name="kecamatan" readonly value="<?php if($q=1) echo 'LUBUK SIKARAH'; elseif($q=2) echo 'TANJUNG HARAPAN'; ?>" class="form-control"/>
+								</div>
+								<div class="form-group">
+									<label for="name">Desa/Kelurahan </label>
+									<input type="read-only" name="nama" readonly value="<?php echo $nama; ?>" class="form-control"/>
+								</div>
+								<div class="form-group">
+									<label for="name">NJOP </label>
+									<input type="email" name="email" readonly value="<?php echo $njop; ?>" class="form-control"/>
+								</div>
+								<div class="form-group">
+									<input type="submit" name="update" class="btn btn-primary" value="Update"/>
+								</div>
 							</form>
 						</div>
 					</div>
+					
 				</div>
 
-				<div class="form" name="form-update">
-					<form method="post" action="update.php">
-						<div class="form-group">
-							<label for="name">NIP </label>
-							<input type="text" name="nip" placeholder="Masukkan NIP" required value="<?php if($error) echo $nip; ?>" class="form-control"/>
-							<span class="text-danger"><?php if (isset($regnip_error)) echo $regnip_error; ?></span>
-						</div>
-						<div class="form-group">
-							<label for="name">Nama </label>
-							<input type="nama" name="nama" placeholder="Nama Lengkap" required value="<?php if($error) echo $nama; ?>" class="form-control"/>
-							<span class="text-danger"><?php if (isset($name_error)) echo $name_error; ?></span>
-						</div>
-						<div class="form-group">
-							<label for="name">Email </label>
-							<input type="email" name="email" placeholder="Email" required value="<?php if($error) echo $email; ?>" class="form-control"/>
-							<span class="text-danger"><?php if (isset($email_error)) echo $email_error; ?></span>
-						</div>
-						<div class="form-group">
-							<label for="name">Password </label>
-							<input type="password" name="password_1" placeholder="Password" required class="form-control" />
-						</div>
-						<div class="form-group">
-							<label for="name">Konfirmasi password </label>
-							<input type="password" name="password_2" placeholder="Konfirmasi Password" required class="form-control" />
-							<span class="text-danger"><?php if (isset($cpassword_error)) echo $cpassword_error; ?></span>
-						</div>
-						<div class="form-group">
-							<input type="submit" name="reg_user" class="btn btn-primary" value="Register"/>
-						</div>
-					</form>
-				</div>
+				
 
 			<div id="map" style="width: 75%;">
 				Map here
