@@ -37,11 +37,11 @@ class UserClass
         $error = true;
         $email_error = "Email sudah terdaftar";
       }
+      
     }
 
     if (!$error) {
       $query = "INSERT INTO public.admin (nip, nama, email, passwd) VALUES('$unip','$unama','$uemail', '$password')";
-      
       if(pg_query($this->db, $query)) {
         @session_start();
         $_SESSION['usr_id'] = $row['email'];
@@ -56,15 +56,17 @@ class UserClass
 	function userLogin($email, $password)
 	{
 		$password = md5($password);
-		$result = pg_query($this->db, "SELECT * FROM public.admin WHERE email = '" . $email . "' and passwd = '" . $password . "'");
-		if ($result->num_rows > 0) { //success
+    $result = pg_query($this->db, "SELECT * FROM public.admin WHERE email = '" . $email . "' and passwd = '" . $password . "'");
+		if (pg_num_rows($result) > 0) { //success
       @session_start();
-      $row = $result->fetch_assoc();
+      $row = pg_fetch_assoc($result);
 			$_SESSION['usr_id'] = $row['email'];
       $_SESSION['usr_name'] = $row['nama'];
+      echo 'asdf'; 
       header('Location: dashboard.php');
 		} else { //fail
-			return false;
+      echo 'knp nih';
+      return false;
     }
   }
 

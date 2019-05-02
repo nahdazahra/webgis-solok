@@ -21,24 +21,17 @@
 	</head>
 	<body onload="up206b.initialize()">
 		<div class="wrap" style="height: 800px">
-			<nav class="navbar-default" role="navigation">
+			<nav class="navbar-default " role="navigation">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="#"><b>Zona Nilai Tanah Kota Solok</b></a>
 					</div>
-					<div class="collapse navbar-collapse">
-						<form class="navbar-form navbar-right">
-							<div id="my_modal" class="btn-group">
-								<?php if (isset($_SESSION['usr_id'])) { ?>
-									<p class="navbar-text">Signed in as <?php echo $_SESSION['usr_name']; ?></p>
-									<a href="logout.php">Logout</a>
-								<?php } else { ?>
-									<button data-toggle="modal" data-target="#id01" class="btn btn-primary modal-btn">Login</button>
-									<button data-toggle="modal" data-target="#id02" class="btn btn-primary modal-btn">Register</button>
-								<?php } ?>
-							</div>
-						</form>
-					</div>
+					<ul class="nav navbar-nav navbar-right">
+					<?php if (isset($_SESSION['usr_id'])) { header('Location:dashboard.php'); } else { ?>
+						<li><a data-toggle="modal"  data-target="#id02" ><span class="glyphicon glyphicon-user modal-btn"></span> Sign Up</a></li>
+						<li><a data-toggle="modal"  data-target="#id01" ><span class="glyphicon glyphicon-log-in modal-btn"></span> Login</a></li>
+					<?php } ?>
+					</ul>
 				</div>
 			</nav>
 	
@@ -134,8 +127,9 @@
 				<div class="sidebar" >
 					<div class="container" style="width:100%; height: 100%; overflow:auto; float:left; padding-left:10px; padding-right:10px;">
 						<br>
+
 						<div class="cari-nama">
-							<input type="submit" value="Search" style="float: right; width: 24%" id="btnfind" name="" class="btn-success form-control">
+							<input type="submit" value="Search" style="float: right; width: 24%" id="btnfind" name="" class="btn-primary form-control">
 							<div style="overflow: hidden; ">
 								<input type="text" style="width: 98%;" list="find" id="inputname" name="" class="form-control" placeholder="Nama Kecamatan...">
 								<datalist id="find">
@@ -144,28 +138,45 @@
 								</datalist>
 							</div>
 						</div>
-						<!-- <div id="listdata" style="background:white; height: auto; overflow: auto;"></div> -->
-
-						<hr>
-
-						<div class="form-check">
-							<input type="checkbox" class="form-check-input" id="zona_tanah">
-							<label class="form-check-label">Lihat seluruh zona tanah</label>
-						</div>
 
 						<hr>
 
 						<div>
 							<div style="padding-top: 10px">
 								<b>Desa/Kelurahan :</b>
-								<input list="listdata" id="starts" class="form-control" onchange="getArea()">
+								<input list="listdata" id="starts" class="form-control" value="" onchange="getArea()">
 									<datalist id="listdata">
 									</datalist>
 							</div>
 							<div style="padding-top: 15px; float: right;">
-								<input type="submit" id="submit" class="btn-primary form-control" style="width: 100%">
+								<input type="submit" id="submit" value="Submit" style="float: right; width: 100%" class="btn-primary form-control">
 							</div>
 						</div>
+
+						<hr>
+
+						<div class="form" name="form-update" style="padding-top: 10px">
+							<form method="post" action="update.php">
+								<div class="form-group">
+									<input type="hidden" id="form-gid" name="gid" value=""/>
+									<label for="name">Kecamatan </label>
+									<input id="form-kec" type="text" name="kecamatan" readonly value="" class="form-control"/>
+								</div>
+								<div class="form-group">
+									<label for="name">Desa/Kelurahan </label>
+									<input id="form-desa" type="text" name="nama" readonly value="" class="form-control"/>
+								</div>
+								<div class="form-group">
+									<label for="name">NJOP </label>
+									<input id="form-njop" type="text" name="njop" readonly value="" class="form-control"/>
+								</div>
+								<div class="form-group">
+									<input type="submit" name="bphtb" class="btn btn-info" value="Lihat BPHTB" />
+									<input type="submit" name="pph" class="btn btn-info" value="Lihat PPH" style="float: right"/>
+								</div>
+							</form>
+						</div>
+						
 					</div>
 				</div>
 
@@ -196,47 +207,55 @@
 					return bounds;
 				}
 
-				var transform = function(multipolygon) {
-				var geojson = ''
-				try {
-					var geojson = Terraformer.WKT.parse(multipolygon)
-					geojson = geojson.toGeographic()
-				}
-				catch (e) {
-					geojson = e;
-					console.log('except');
-				}
-				
-				// $('#output').val(JSON.stringify(geojson, undefined, 2));
-				// console.log(multipolygon);
-				console.log(JSON.stringify(geojson, undefined, 2));
-				var bounds = new google.maps.LatLngBounds();
-				
-				var paths = _.map(geojson.coordinates, function(entry) {
-					return _.reduce(entry, function(list, polygon) {
-					// This map() only transforms the data.
-					_.each(_.map(polygon, function(point) {
-						// Important: the lat/lng are vice-versa in GeoJSON
-						return new google.maps.LatLng(point[1], point[0]);
-					}), function(point) {
-						list.push(point);
+				var transform = function(multipolygon, map, nama, q, njop, gid) {
+					var geojson = ''
+					try {
+						var geojson = Terraformer.WKT.parse(multipolygon)
+						geojson = geojson.toGeographic()
+					}
+					catch (e) {
+						geojson = e;
+						console.log('except');
+					}
+					
+					// console.log(JSON.stringify(geojson, undefined, 2));
+					var bounds = new google.maps.LatLngBounds();
+					
+					var paths = _.map(geojson.coordinates, function(entry) {
+						return _.reduce(entry, function(list, polygon) {
+						// This map() only transforms the data.
+							_.each(_.map(polygon, function(point) {
+							// Important: the lat/lng are vice-versa in GeoJSON
+							return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
+						}), function(point) {
+							list.push(point);
+						});
+
+						return list;
+						}, []);
 					});
 
-					return list;
-					}, []);
-				});
+					fillIdx = (fillIdx >= fills.length) ? 0 : fillIdx + 1;
+					var polygon = new google.maps.Polygon({
+						paths: paths,
+						strokeWeight: 0,
+						fillColor: fills[fillIdx],
+						fillOpacity: 0.90
+					});
 
-				fillIdx = (fillIdx >= fills.length) ? 0 : fillIdx + 1;
+					var bounds = new google.maps.LatLngBounds();
+					for (var i=0; i< paths[0].length; i++) {
+						bounds.extend(paths[0][i]);
+					}
 
-				var polygon = new google.maps.Polygon({
-					paths: paths,
-					strokeWeight: 0,
-					fillColor: fills[fillIdx],
-					fillOpacity: 0.35
-				});
+					var myLatlng = bounds.getCenter();
 
-				console.log(polygon);
-				return polygon;
+					marker=new google.maps.Marker({
+						position: myLatlng, map: map, animation: google.maps.Animation.DROP
+					});
+					resultmarker.push(marker);
+					createInfoWindow(marker, nama, q, njop, gid);
+					return polygon;
 				};
 
 				$(function() {
@@ -256,17 +275,29 @@
 
 				//declare map
 				var map;
-
-				//set the geocoder
-				var geocoder = new google.maps.Geocoder();
+				var mydata;
+				var resultmarker = [];
 
 				function trace(message) 
-				{
+				{ 
 					if (typeof console != 'undefined') 
 					{
 						console.log(message);
 					}
 				}
+
+				var createInfoWindow = function(marker, nama, q, njop, gid){
+						infowindow = new google.maps.InfoWindow();
+						google.maps.event.addListener(marker, 'click', function(){
+							infowindow.close();
+							infowindow.setContent("<b>Desa/Kelurahan</b> : "+nama+"<br><b>Kecamatan</b> : "+inputname.value+"<br><b>NJOP</b> : Rp "+njop);
+							infowindow.open(map, marker);
+							document.getElementById("form-gid").value = gid;
+							document.getElementById("form-kec").value = q;
+							document.getElementById("form-desa").value = nama;
+							document.getElementById("form-njop").value = njop;
+						});
+					}
 
 				//Function that gets run when the document loads
 				up206b.initialize = function()
@@ -278,47 +309,33 @@
 				}
 
 				var getArea = function(){
-						$.ajax({
-								url: "common.php?q="+inputname.value+"&desa="+starts.value,
-								dataType: 'json',
-								method: 'GET',
-								error: function(data){
-									alert('Data does not exist!');
-									return;
-								},
-								success: function(data){
-									map.setMap(NULL);
+					var markers = [];
+					var infowindow = [];
+					$.ajax({
+							url: "common.php?q="+inputname.value+"&desa="+starts.value,
+							dataType: 'json',
+							method: 'GET',
+							error: function(data){
+								alert('Data does not exist!');
+								return;
+							},
+							success: function(data){
+								up206b.initialize();
+								mydata = data;
+								// console.log(mydata);
+								var i;
+								for(i = 0; i < data['list'].length; i++) {
+									var polygon=transform(data['list'][i]['area'], map, data['list'][i]['nama'], inputname.value, data['list'][i]['njop'], data['list'][i]['gid']);
+									polygon.setMap(map);
 								}
-							});
+								map.fitBounds(polygon.getBounds());
+							}
+						});
 					}
-					
+
 				function initialize() {
 					
-					function show_zona_tanah(){
-						zona_tanah = new google.maps.Data();
-						zona_tanah.addGeoJson('geojson.php');
-						// zona_tanah.setMap(map);
-					}
-					function toggle_zona_tanah(){
-						if (typeof zona_tanah.setMap == 'function') {
-							if (document.getElementById("zona_tanah").checked == true) {
-								zona_tanah.setMap(map);
-							}
-							else {
-								zona_tanah.setMap(null);
-							}
-						}
-						else{
-							if (document.getElementById("zona_tanah").checked == true) {
-								show_zona_tanah();
-							}
-						}
-					}
-					
-					document.getElementById("zona_tanah").addEventListener("change", toggle_zona_tanah);
-
 					resultmarker = [];
-					
 
 					function findname(){
 						for (var i = 0; i < resultmarker.length; i++){
@@ -331,6 +348,9 @@
 						}
 						else{
 							document.getElementById("listdata").innerHTML = "";
+							document.getElementById("listdata").value = "";
+							document.getElementById("starts").innerHTML = "";
+							document.getElementById("starts").value = "";
 							$.ajax({
 								url: "common.php?q="+inputname.value,
 								dataType: 'json',
@@ -340,17 +360,13 @@
 									return;
 								},
 								success: function(data){
-									document.getElementById("listdata").innerHTML="";
+									up206b.initialize();
+									document.getElementById("listdata").innerHTML = "";
+									document.getElementById("listdata").value = "";
+									document.getElementById("starts").innerHTML = "";
+									document.getElementById("starts").value = "";
 									var i;
 									for(i = 0; i < data['list'].length; i++) {
-										// newcenter=new google.maps.LatLng(latitude, longitude);
-										// marker=new google.maps.Marker({
-										// 	position: newcenter, map: map, animation: google.maps.Animation.DROP
-										// });
-										// resultmarker.push(marker);
-										// map.setZoom(13);
-										// map.setCenter(newcenter);
-										// createInfoWindow(marker, gid, nama);
 										var polygon=transform(data['list'][i]['area']);
 										polygon.setMap(map);
 									}
@@ -362,51 +378,7 @@
 									map.fitBounds(polygon.getBounds());
 								}
 							});
-							// var xmlhttp = new XMLHttpRequest();
-							// var url = "common.php?q="+inputname.value;
-							// xmlhttp.onreadystatechange = function() {
-							// 	if (this.readyState == 4 && this.status == 200) {
-							// 		var arr = JSON.parse(this.responseText);
-							// 		if(arr == null){
-							// 			alert('Data does not exist!');
-							// 			return;
-							// 		}
-							// 		var i;
-
-							// 		for(i = 0; i < arr['list'].length; i++) {
-							// 			// newcenter=new google.maps.LatLng(latitude, longitude);
-							// 			// marker=new google.maps.Marker({
-							// 			// 	position: newcenter, map: map, animation: google.maps.Animation.DROP
-							// 			// });
-							// 			// resultmarker.push(marker);
-							// 			// map.setZoom(13);
-							// 			// map.setCenter(newcenter);
-							// 			// createInfoWindow(marker, gid, nama);
-							// 			var polygon=transform(arr[i]['area']);
-							// 			polygon.setMap(map);
-							// 		}
-
-							// 		for (i=0; i<arr['nama'].length; i++) {
-							// 			nama=arr[i].nama;
-							// 			document.getElementById("listdata").innerHTML += "<li onclick='showdetail(this.id)'>"+nama+"</li>";
-							// 		}
-							// 		map.fitBounds(polygon.getBounds());
-							// 	}
-							// };
-							// xmlhttp.open("GET", url, true);
-							// xmlhttp.send();
 						}
-					}
-
-					
-
-					function createInfoWindow(marker, gid, nama){
-						infowindow = new google.maps.InfoWindow();
-						google.maps.event.addListener(marker, 'click', function(){
-							infowindow.close();
-							infowindow.setContent("<b>Desa/Kelurahan</b> : "+kel+"<br><b>Kecamatan : </b>"+kec+"<br><b>NJOP : </b>"+njop);
-							infowindow.open(map, marker);
-						});
 					}
 
 					document.getElementById("btnfind").addEventListener("click", findname);

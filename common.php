@@ -11,18 +11,22 @@
 		$q=2;
   }
   
+  $njop = $_GET["njop"];
   // desa
   if (isset($_GET['q'])){
-    $sql = "SELECT nama, st_astext(geom) As area, obj_id FROM znt_desa WHERE obj_id = '$q'";
+    $sql = "SELECT gid, nama, st_astext(geom) As area, obj_id, njop FROM znt_desa WHERE obj_id = '$q'";
     if(isset($_GET['desa']) && $_GET['desa']){
       $sql.=" AND nama = '$desa'";
     }
     $result = pg_query($sql);
     while($row = pg_fetch_array($result)){
+      $gid=$row['gid'];
       $nama=$row['nama'];
       $area=$row['area'];
-      $dataarray[]=array('nama'=>$nama,'area'=>$area);
+      $njop=$row['njop'];
+      $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$area,'njop'=>$njop);
     }
+    
     $sql = "SELECT DISTINCT nama FROM znt_desa WHERE obj_id = '$q'";
     $result2 = pg_query($sql);
     while($row2 = pg_fetch_array($result2)){
@@ -31,5 +35,5 @@
     }
     echo json_encode (array('list'=>$dataarray, 'nama'=>$dataarray2));
   }
-  
+
 ?>

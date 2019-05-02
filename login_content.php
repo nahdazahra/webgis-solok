@@ -1,6 +1,6 @@
 <?php
 
-include_once 'config.php';
+require('config.php');
 
 //check if form is submitted
 if (isset($_POST['login_user'])) {
