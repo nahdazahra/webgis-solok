@@ -29,7 +29,7 @@
 		<script src="https://unpkg.com/terraformer-arcgis-parser@1.0.5"></script>
 		<script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
 	</head>
-	
+
 	<body onload="up206b.initialize()">
 		<div class="wrap" style="height: 800px">
 			<nav class="navbar-default " role="navigation" style="background-color: #c1c1c1">
@@ -253,8 +253,8 @@
 						// This map() only transforms the data.
 							_.each(_.map(polygon, function(point) {
 							// Important: the lat/lng are vice-versa in GeoJSON
-							// return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
-							return new google.maps.LatLng(point[1], point[0]);
+							return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
+							// return new google.maps.LatLng(point[1], point[0]);
 						}), function(point) {
 							list.push(point);
 						});

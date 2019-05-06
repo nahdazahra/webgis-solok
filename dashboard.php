@@ -260,8 +260,8 @@
 						// This map() only transforms the data.
 							_.each(_.map(polygon, function(point) {
 							// Important: the lat/lng are vice-versa in GeoJSON
-							// return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
-							return new google.maps.LatLng(point[1], point[0]);
+							return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
+							// return new google.maps.LatLng(point[1], point[0]);
 						}), function(point) {
 							list.push(point);
 						});
