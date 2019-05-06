@@ -43,7 +43,7 @@
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Signed in as <b><?php echo $_SESSION['usr_name']; ?></b>!<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a name="u_npoptkp" data-toggle="modal" data-target="#up_npoptkp" class="modal-btn">Ubah NPOPTKP</a></li>	
+								<li><a data-toggle="modal" data-target="#up_npoptkp" class="modal-btn">Ubah NPOPTKP</a></li>	
 								<li><a data-toggle="modal" data-target="#list_admin" class="modal-btn">Daftar Admin</a></li>
 								<li><a href="logout.php">Logout</a></li>
 							</ul>
@@ -105,7 +105,6 @@
 										$sql="SELECT nip, nama, email FROM public.admin ORDER BY nama ASC";
 										$result = pg_query($sql);
 										if ($result > 0) {
-											echo($row);
 											// output data of each row
 											while($row = pg_fetch_array($result)) {
 												echo '<tr>

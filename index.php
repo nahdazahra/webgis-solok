@@ -182,6 +182,66 @@
 							</form>
 						</div>
 						
+						<hr>
+
+						<div id="leftsideMenu">
+							<ul style="list-style-type:none">
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai sampai 100.000" />
+										<div class="color-box" style="background-color: #d4ffd2;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai 100.000 - 200.000" />
+										<div class="color-box" style="background-color: #d3ffa8;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai 200.000 - 500.000" />
+										<div class="color-box" style="background-color: #abfd5d;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai 500.000 - 1.000.000" />
+										<div class="color-box" style="background-color: #88ac2e;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai 1.000.000 - 2.000.000" />
+										<div class="color-box" style="background-color: #60a93e;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai 2.000.000 - 5.000.000" />
+										<div class="color-box" style="background-color: #5b8436;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai 5.000.000 - 10.000.000" />
+										<div class="color-box" style="background-color: #315c2f;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai 10.000.000 - 20.000.000" />
+										<div class="color-box" style="background-color: #5b5930;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:80%" value="Nilai lebih dari 20.000.000" />
+										<div class="color-box" style="background-color: #5a3334;"></div>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 
