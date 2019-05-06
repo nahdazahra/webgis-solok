@@ -27,7 +27,7 @@
       $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$area,'njop'=>$njop);
     }
     
-    $sql = "SELECT DISTINCT nama FROM znt_desa WHERE obj_id = '$q'";
+    $sql = "SELECT DISTINCT nama FROM znt_desa WHERE obj_id = '$q' ORDER BY nama ASC";
     $result2 = pg_query($sql);
     while($row2 = pg_fetch_array($result2)){
       $nama=$row2['nama'];

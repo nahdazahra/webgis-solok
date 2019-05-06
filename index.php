@@ -13,6 +13,9 @@
     <script data-require="jquery@*" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		<script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.css" rel="stylesheet"/>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.js"></script>
 		
 		<!-- Javascript untuk modal form -->
 		<script src="script.js"></script>
@@ -45,8 +48,8 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								<h4 class="modal-title">Login Form</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h4 class="modal-title">Login Form</h4>
 						</div>
 						<div class="modal-body" id="myModalBody1">
 							<form role="form" method="post" action="login_content.php">
@@ -63,8 +66,7 @@
 										<input type="submit" name="login_user" class="btn btn-primary" value="Login"/>
 									</div>
 									<div class="row">
-										<div class="col-md-4 col-md-offset-4 text-center">	
-										New User? <a href="#" onclick="$('#id01').modal('hide')" data-toggle="modal" data-target="#id02"> Register</a>
+										<div class="col-md-4 col-md-offset-4 text-center">Belum punya akun? <a href="#" onclick="$('#id01').modal('hide')" data-toggle="modal" data-target="#id02"> Daftar</a>
 										</div>
 									</div>
 								</fieldset>
@@ -142,25 +144,23 @@
 						<div class="cari-nama">
 							<div style="overflow: hidden; ">
 								<b>Kecamatan :</b>
-								<input type="text" style="width: 98%;" list="find" id="inputname" name="" class="form-control" placeholder="Nama Kecamatan...">
-								<datalist id="find">
-									<option value="LUBUK SIKARAH"></option>
-									<option value="TANJUNG HARAPAN"></option>
-								</datalist>
+								<select id="inputname" style="width: 70%;">
+									<option value="" disabled>Pilih Kecamatan</option>
+									<option value="LUBUK SIKARAH">LUBUK SIKARAH</option>
+									<option value="TANJUNG HARAPAN">TANJUNG HARAPAN</option>
+								</select>
 							</div>
-							<input type="submit" value="Search" style="float: right; width: 24%" id="btnfind" name="" class="btn-primary form-control">
 						</div>
 
 						<div>
 							<div style="padding-top: 10px">
 								<div style="overflow: hidden; ">
 									<b>Desa/Kelurahan :</b>
-									<input list="listdata" id="starts" style="width: 100%;" class="form-control" value="" onchange="getArea()">
-										<datalist id="listdata">
-										</datalist>
+									<select id="starts" >
+										<option value="" disabled>Pilih Kecamatan terlebih dahulu</option>
+									</select>
 								</div>
 							</div>
-							<input type="submit" id="submit" value="Submit" style="float: right; width: 24%" class="btn-primary form-control">
 						</div>
 
 						<hr>
@@ -189,6 +189,24 @@
 			</div>
 
 			<script>
+				$('.select2').select2({
+					templateResult: function (data) {    
+						// We only really care if there is an element to pull classes from
+						if (!data.element) {
+							return data.text;
+						}
+
+						var $element = $(data.element);
+
+						var $wrapper = $('<span></span>');
+						$wrapper.addClass($element[0].className);
+
+						$wrapper.text(data.text);
+
+						return $wrapper;
+					}
+				});
+				
 				var fillIdx = 0;
 				var fills = [
 				'#d4ffd2',
@@ -342,7 +360,7 @@
 				up206b.initialize = function()
 				{
 					var myOptions = {
-						center: {lat: -0.7900853, lng: 100.6488506}, zoom: 17 
+						center: {lat: -0.7900853, lng: 100.6488506}, zoom: 17
 					};
 					map = new google.maps.Map(document.getElementById("map"), myOptions);
 				}
@@ -386,8 +404,6 @@
 							alert("The column should not be blank!");
 						}
 						else{
-							document.getElementById("listdata").innerHTML = "";
-							document.getElementById("listdata").value = "";
 							document.getElementById("starts").innerHTML = "";
 							document.getElementById("starts").value = "";
 							$.ajax({
@@ -400,8 +416,6 @@
 								},
 								success: function(data){
 									up206b.initialize();
-									document.getElementById("listdata").innerHTML = "";
-									document.getElementById("listdata").value = "";
 									document.getElementById("starts").innerHTML = "";
 									document.getElementById("starts").value = "";
 									var i;
@@ -412,7 +426,7 @@
 
 									for (i=0; i<data['nama'].length; i++) {
 										nama=data['nama'][i].nama;
-										document.getElementById("listdata").innerHTML += "<option value='"+nama+"'>";
+										document.getElementById("starts").innerHTML += "<option value='"+nama+"'>"+nama+"</option>";
 									}
 									map.fitBounds(polygon.getBounds());
 								}
@@ -420,12 +434,12 @@
 						}
 					}
 
-					document.getElementById("btnfind").addEventListener("click", findname);
-					document.getElementById("inputname").addEventListener("keyup", function(event){
-						if (event.keyCode==13){
-							btnfindname();
-						}
-					});
+					document.getElementById("inputname").addEventListener("change", findname);
+					document.getElementById("starts").addEventListener("change", getArea);
+
+					// $("#inputname").on("select2:selecting", findname);
+					// $("#starts").on("select2:selecting", getArea);
+
 				}
 				google.maps.event.addDomListener(window, 'load', initialize);
 			</script>

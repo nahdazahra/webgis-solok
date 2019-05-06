@@ -17,12 +17,20 @@
 		header('Location: dashboard.php');
 	}
 
-	else if(isset($_POST['upd_npoptkp'])){
-		$unpoptkp = $_POST['unpoptkp'];
-		$upd_npoptkp = "UPDATE npoptkp SET npoptkp = '$unpoptkp'" ;
-		$result = pg_query($upd_npoptkp);
-		header('Location: dashboard.php');
-	}
+	// else if(isset($_POST['upd_npoptkp'])){
+	// 	$unpoptkp = $_POST['unpoptkp'];
+	// 	date
+	// 	$upd_npoptkp = "INSERT INTO npoptkp(nilai, date) VALUES('$unpoptkp', ) nilai = '$unpoptkp'" ;
+	// 	$result = pg_query($upd_npoptkp);
+		
+  //   if(! $result ) {
+	// 		die('Could not update data: ' . pg_error());
+	// 		echo 'fail';
+	// 	}
+	// 	else{
+	// 		echo 'success';
+	// 	}
+	// }
 
 	else if (isset($_POST['bphtb'])) {
     // Instanciation of inherited class

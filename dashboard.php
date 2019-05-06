@@ -51,7 +51,7 @@
 							<h4 class="modal-title">Ubah Nilai NPOPTKP</h4>
 						</div>
 						<div class="modal-body" id="myModalBody1">
-							<form method="post" action="register_content.php">
+							<form method="post" action="update.php">
 								<div class="form-group">
 									<label for="name">Terakhir diubah </label>
 									<input readonly type="text" name="tgl_npoptkp" class="form-control"/>
@@ -125,28 +125,26 @@
 				<div class="sidebar" >
 					<div class="container" style="width:100%; height: 100%; overflow:auto; float:left; padding-left:10px; padding-right:10px;">
 						<br>
+
 						<div class="cari-nama">
-							<input type="submit" value="Search" style="float: right; width: 24%" id="btnfind" name="" class="btn-primary form-control">
 							<div style="overflow: hidden; ">
-								<input type="text" style="width: 98%;" list="find" id="inputname" name="" class="form-control" placeholder="Nama Kecamatan...">
-								<datalist id="find">
-									<option value="LUBUK SIKARAH"></option>
-									<option value="TANJUNG HARAPAN"></option>
-								</datalist>
+								<b>Kecamatan :</b>
+								<select id="inputname" style="width: 70%;">
+									<option value="" disabled>Pilih Kecamatan</option>
+									<option value="LUBUK SIKARAH">LUBUK SIKARAH</option>
+									<option value="TANJUNG HARAPAN">TANJUNG HARAPAN</option>
+								</select>
 							</div>
 						</div>
 
-						<hr>
-
 						<div>
 							<div style="padding-top: 10px">
-								<b>Desa/Kelurahan :</b>
-								<input list="listdata" id="starts" class="form-control" value="" onchange="getArea()">
-									<datalist id="listdata">
-									</datalist>
-							</div>
-							<div style="padding-top: 15px; float: right;">
-								<input type="submit" id="submit" value="Submit" style="float: right; width: 100%" class="btn-primary form-control">
+								<div style="overflow: hidden; ">
+									<b>Desa/Kelurahan :</b>
+									<select id="starts" >
+										<option value="" disabled>Pilih Kecamatan terlebih dahulu</option>
+									</select>
+								</div>
 							</div>
 						</div>
 
@@ -178,11 +176,15 @@
 			<script>
 				var fillIdx = 0;
 				var fills = [
-				'#22A164',
-				'#00005E',
-				'#3C0D68',
-				'#FB3837',
-				'#22A164',
+				'#d4ffd2',
+				'#d3ffa8',
+				'#abfd5d',
+				'#88ac2e',
+				'#60a93e',
+				'#5b8436',
+				'#315c2f',
+				'#5b5930',
+				'#5a3334',
 				];
 				
 				google.maps.Polygon.prototype.getBounds = function() {
@@ -217,7 +219,8 @@
 						// This map() only transforms the data.
 							_.each(_.map(polygon, function(point) {
 							// Important: the lat/lng are vice-versa in GeoJSON
-							return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
+							// return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
+							return new google.maps.LatLng(point[1], point[0]);
 						}), function(point) {
 							list.push(point);
 						});
@@ -226,10 +229,37 @@
 						}, []);
 					});
 
-					fillIdx = (fillIdx >= fills.length) ? 0 : fillIdx + 1;
+					if(njop<=100000){
+						fillIdx = 0;
+					}
+					else if(njop>100000 && njop<=200000){
+						fillIdx = 1;
+					}
+					else if(njop>200000 && njop<=500000){
+						fillIdx = 2;
+					}
+					else if(njop>500000 && njop<=1000000){
+						fillIdx = 3;
+					}
+					else if(njop>1000000 && njop<=2000000){
+						fillIdx = 4;
+					}
+					else if(njop>2000000 && njop<=5000000){
+						fillIdx = 5;
+					}
+					else if(njop>5000000 && njop<=10000000){
+						fillIdx = 6;
+					}
+					else if(njop>10000000 && njop<=20000000){
+						fillIdx = 7;
+					}
+					else if(njop>=20000000){
+						fillIdx = 8;
+					}
+
 					var polygon = new google.maps.Polygon({
 						paths: paths,
-						strokeWeight: 0,
+						strokeWeight: 1,
 						fillColor: fills[fillIdx],
 						fillOpacity: 0.90
 					});
@@ -294,7 +324,7 @@
 				up206b.initialize = function()
 				{
 					var myOptions = {
-						center: {lat: -0.7900853, lng: 100.6488506}, zoom: 15
+						center: {lat: -0.7900853, lng: 100.6488506}, zoom: 17
 					};
 					map = new google.maps.Map(document.getElementById("map"), myOptions);
 				}
@@ -338,8 +368,6 @@
 							alert("The column should not be blank!");
 						}
 						else{
-							document.getElementById("listdata").innerHTML = "";
-							document.getElementById("listdata").value = "";
 							document.getElementById("starts").innerHTML = "";
 							document.getElementById("starts").value = "";
 							$.ajax({
@@ -352,36 +380,27 @@
 								},
 								success: function(data){
 									up206b.initialize();
-									document.getElementById("listdata").innerHTML = "";
-									document.getElementById("listdata").value = "";
 									document.getElementById("starts").innerHTML = "";
 									document.getElementById("starts").value = "";
 									var i;
 									for(i = 0; i < data['list'].length; i++) {
-										var polygon=transform(data['list'][i]['area']);
+										var polygon=transform(data['list'][i]['area'], map, data['list'][i]['nama'], inputname.value, data['list'][i]['njop'], data['list'][i]['gid']);
 										polygon.setMap(map);
 									}
 
 									for (i=0; i<data['nama'].length; i++) {
 										nama=data['nama'][i].nama;
-										document.getElementById("listdata").innerHTML += "<option value='"+nama+"'>";
+										document.getElementById("inputname").innerHTML += "<option value='"+nama+"'>";
 									}
 									map.fitBounds(polygon.getBounds());
 								}
 							});
 						}
 					}
+					
+					document.getElementById("inputname").addEventListener("change", findname);
+					document.getElementById("starts").addEventListener("change", getArea);
 
-					document.getElementById("btnfind").addEventListener("click", findname);
-					document.getElementById("inputname").addEventListener("keyup", function(event){
-						if (event.keyCode==13){
-							btnfindname();
-						}
-					});
-
-					var directionsService = new google.maps.DirectionsService;
-					var directionsDisplay = new google.maps.DirectionsRenderer;
-					directionsDisplay.setMap(map);
 				}
 				google.maps.event.addDomListener(window, 'load', initialize);
 			</script>
