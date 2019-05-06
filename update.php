@@ -1,9 +1,7 @@
 <?php
 	// header('Content-Type: application/json');
 	require('config.php');
-	
 	require("fpdf/fpdf.php");
-	// $sql1 = "SELECT * FROM npoptkp";
 
 	if(isset($_POST['update'])) {
 		$unjop = $_POST["njop"];
@@ -39,13 +37,15 @@
     $pdf->AliasNbPages();
     $pdf->AddPage();
 		$pdf->SetFont('Helvetica','B',18);
-		$pdf->Cell(0,20,"Nilai BPTBH Zona Tanah Wilayah Kota Solok",1,1,C);
-		// $v_npoptkp = pq_query($sql1);
+		$pdf->Cell(0,20,"Nilai BPTBH Zona Tanah Wilayah Kota Solok",1,1);
+		$sql="SELECT nilai FROM public.npoptkp";
+		$result = pg_query($sql);
+		$row = pg_fetch_array($result);
 
 		$gid = $_POST['gid'];
     $kec = $_POST['kecamatan'];
     $desa = $_POST['nama'];
-    $bphtb = 5/100*($_POST['njop']-$v_npoptkp);
+    $bphtb = 5/100*($_POST['njop']-$row['nilai']);
 
     $pdf->Cell(0,10,"Kecamatan : {$kec}",0,1);
     $pdf->Cell(0,10,"Desa/Kelurahan : {$desa}",0,1);
@@ -61,7 +61,7 @@
 		$pdf->AliasNbPages();
 		$pdf->AddPage();
     $pdf->SetFont('Helvetica','B',18);
-		$pdf->Cell(0,20,"Nilai PPH Zona Tanah Wilayah Kota Solok",1,1,C);
+		$pdf->Cell(0,20,"Nilai PPH Zona Tanah Wilayah Kota Solok",1,1);
 
 		$gid = $_POST['gid'];
 		$kec = $_POST['kecamatan'];

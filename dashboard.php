@@ -64,11 +64,21 @@
 							<form method="post" action="update.php">
 								<div class="form-group">
 									<label for="name">Terakhir diubah </label>
-									<input readonly type="text" name="tgl_npoptkp" class="form-control"/>
+									<?php
+										$sql="SELECT date FROM public.npoptkp";
+										$result = pg_query($sql);
+										$row = pg_fetch_array($result);
+										echo '<input readonly type="text" name="tgl_npoptkp" class="form-control" value="'.$row["date"].'"/>'
+									?>
 								</div>
 								<div class="form-group">
 									<label for="name">NPOPTKP saat ini </label>
-									<input readonly type="text" name="npoptkp" class="form-control" />
+									<?php
+										$sql="SELECT nilai FROM public.npoptkp";
+										$result = pg_query($sql);
+										$row = pg_fetch_array($result);
+										echo '<input readonly type="text" name="npoptkp" class="form-control" value="'.$row["nilai"].'"/>'
+									?>
 								</div>
 								<div class="form-group">
 									<label for="name">NPOPTKP baru </label>
@@ -187,6 +197,67 @@
 									<input type="submit" name="update" class="btn btn-success" value="Update" style="float: right"/>
 								</div>
 							</form>
+						</div>
+						
+						<hr>
+
+						<div id="leftsideMenu">
+							<ul style="list-style-type:none">
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai sampai 100.000" />
+										<div class="color-box" style="background-color: #d4ffd2;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai 100.000 - 200.000" />
+										<div class="color-box" style="background-color: #d3ffa8;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai 200.000 - 500.000" />
+										<div class="color-box" style="background-color: #abfd5d;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai 500.000 - 1.000.000" />
+										<div class="color-box" style="background-color: #88ac2e;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai 1.000.000 - 2.000.000" />
+										<div class="color-box" style="background-color: #60a93e;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai 2.000.000 - 5.000.000" />
+										<div class="color-box" style="background-color: #5b8436;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai 5.000.000 - 10.000.000" />
+										<div class="color-box" style="background-color: #315c2f;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai 10.000.000 - 20.000.000" />
+										<div class="color-box" style="background-color: #5b5930;"></div>
+									</div>
+								</li>
+								<li>
+									<div class="input-color">
+										<input type="text" style="width:90%" value="Nilai lebih dari 20.000.000" />
+										<div class="color-box" style="background-color: #5a3334;"></div>
+									</div>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
