@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Zona Nilai Tanah Kota Solok</title>
+		<title>Peta Zona Nilai Tanah Kota Solok</title>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" >
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script type="text/javascript" src="js/bootstrap.js"></script>
@@ -13,7 +13,8 @@
     <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script src="script.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAxgh83y8vSI1-91nTOTDiUfQUmWmpcfRU&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
-		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 		<script src="https://underscorejs.org/underscore.js"></script>
 		<script src="https://unpkg.com/terraformer@1.0.8"></script>
 		<script src="https://unpkg.com/terraformer-arcgis-parser@1.0.5"></script>
@@ -21,21 +22,105 @@
 	</head>
 
 	<body onload="up206b.initialize()">
-		<div class="wrap" style="height: 800px">
+		<div class="wrap" style="1000px">
 			<nav class="navbar-inverse" role="navigation">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#"><b>Zona Nilai Tanah Kota Solok</b></a>
+						<a class="navbar-brand" href="#"><b>Peta Zona Nilai Tanah Kota Solok</b></a>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
 					<?php if (isset($_SESSION['usr_id'])) { ?>
-						<li><p class="navbar-text">Signed in as <b><?php echo $_SESSION['usr_name']; ?></b>!</p></li>
-						<li><a href="logout.php">Logout</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Signed in as <b><?php echo $_SESSION['usr_name']; ?></b>!<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a name="u_npoptkp" data-toggle="modal" data-target="#up_npoptkp" class="modal-btn">Ubah NPOPTKP</a></li>	
+								<li><a data-toggle="modal" data-target="#list_admin" class="modal-btn">Daftar Admin</a></li>
+								<li><a href="logout.php">Logout</a></li>
+							</ul>
+						</li>
 					<?php } else { header('Location:index.php'); } ?>
 					</ul>
 				</div>
 			</nav>
+
+			<div id="up_npoptkp" class="modal fade" aria-labelledby="myModalLabel" aria-hidden="true" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h4 class="modal-title">Ubah Nilai NPOPTKP</h4>
+						</div>
+						<div class="modal-body" id="myModalBody1">
+							<form method="post" action="register_content.php">
+								<div class="form-group">
+									<label for="name">Terakhir diubah </label>
+									<input readonly type="text" name="tgl_npoptkp" class="form-control"/>
+								</div>
+								<div class="form-group">
+									<label for="name">NPOPTKP saat ini </label>
+									<input readonly type="text" name="npoptkp" class="form-control" />
+								</div>
+								<div class="form-group">
+									<label for="name">NPOPTKP baru </label>
+									<input type="text" name="unpoptkp" class="form-control" />
+								</div>
+								<div class="form-group">
+									<input type="submit" name="upd_npoptkp" class="btn btn-primary" value="Simpan"/>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="list_admin" class="modal fade" aria-labelledby="myModalLabel" aria-hidden="true" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h4 class="modal-title">Daftar Administrator</h4>
+						</div>
+						<div class="modal-body" id="myModalBody2">
+							<form method="post" action="register_content.php">
+								<div class="form-group">
+									<label for="name">Terakhir diubah </label>
+									<input readonly type="text" name="tgl_npoptkp" class="form-control"/>
+								</div>
+								<div class="form-group">
+									<label for="name">NPOPTKP saat ini </label>
+									<input readonly type="text" name="npoptkp" class="form-control" />
+								</div>
+								<div class="form-group">
+									<label for="name">NPOPTKP baru </label>
+									<input type="text" name="u_npoptkp" class="form-control" />
+								</div>
+								<div class="form-group">
+									<input type="submit" name="upd_npoptkp" class="btn btn-primary" value="Simpan"/>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script>
+			// Get the modal
+			var modal1 = document.getElementById('list_admin');
+			var modal2 = document.getElementById('up_npoptkp');
 	
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal1) {
+					modal1.style.display = "none";
+				}
+			}
+			window.onclick = function(event) {
+				if (event.target == modal2) {
+					modal2.style.display = "none";
+				}
+			}
+			</script>
+
 			<div class="body-content">
 				<div class="sidebar" >
 					<div class="container" style="width:100%; height: 100%; overflow:auto; float:left; padding-left:10px; padding-right:10px;">
@@ -68,16 +153,10 @@
 						<hr>
 
 						<div class="form" name="form-update" style="padding-top: 10px">
-							<form method="post" action="update.php">
-								<div class="form-group">
-									<input type="hidden" id="form-gid" name="gid" value=""/>
-									<label for="name">Kecamatan </label>
-									<input id="form-kec" type="text" name="kecamatan" readonly value="" class="form-control"/>
-								</div>
-								<div class="form-group">
-									<label for="name">Desa/Kelurahan </label>
-									<input id="form-desa" type="text" name="nama" readonly value="" class="form-control"/>
-								</div>
+							<form method="post" target="blank" action="update.php">
+								<input id="form-gid" type="hidden" name="gid" value=""/>
+								<input id="form-kec" type="hidden" name="kecamatan" value="" class="form-control"/>
+								<input id="form-desa" type="hidden" name="nama" value="" class="form-control"/>
 								<div class="form-group">
 									<label for="name">NJOP </label>
 									<input id="form-njop" type="text" name="njop" value="" class="form-control"/>

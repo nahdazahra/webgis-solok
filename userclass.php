@@ -48,6 +48,7 @@ class UserClass
         $_SESSION['usr_name'] = $row['nama'];
         header('Location: dashboard.php');
       } else {
+        echo "Registrasi gagal";
         $errormsg = "Registrasi gagal";
       }
     }

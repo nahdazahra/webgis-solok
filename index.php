@@ -6,14 +6,21 @@
 	<head>
 		<title>Zona Nilai Tanah Kota Solok</title>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" >
+
+		<!-- Bootstrap dan CSS untuk tampilan -->
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script type="text/javascript" src="js/bootstrap.js"></script>
     <script data-require="jquery@*" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		
+		<!-- Javascript untuk modal form -->
 		<script src="script.js"></script>
+
+		<!-- API Google Maps -->
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAxgh83y8vSI1-91nTOTDiUfQUmWmpcfRU&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
 		
+		<!-- API terraformer untuk generate geom ke lat-lng-->
 		<script src="https://underscorejs.org/underscore.js"></script>
 		<script src="https://unpkg.com/terraformer@1.0.8"></script>
 		<script src="https://unpkg.com/terraformer-arcgis-parser@1.0.5"></script>
@@ -21,15 +28,14 @@
 	</head>
 	<body onload="up206b.initialize()">
 		<div class="wrap" style="height: 800px">
-			<nav class="navbar-default " role="navigation">
+			<nav class="navbar-default " role="navigation" style="background-color: #c1c1c1">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="#"><b>Zona Nilai Tanah Kota Solok</b></a>
 					</div>
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav navbar-right" >
 					<?php if (isset($_SESSION['usr_id'])) { header('Location:dashboard.php'); } else { ?>
-						<li><a data-toggle="modal"  data-target="#id02" ><span class="glyphicon glyphicon-user modal-btn"></span> Sign Up</a></li>
-						<li><a data-toggle="modal"  data-target="#id01" ><span class="glyphicon glyphicon-log-in modal-btn"></span> Login</a></li>
+						<li><a data-toggle="modal" data-target="#id01" ><span class="glyphicon glyphicon-log-in modal-btn"></span> Sign in as Administrator</a></li>
 					<?php } ?>
 					</ul>
 				</div>
@@ -55,6 +61,11 @@
 									</div>
 									<div class="form-group">
 										<input type="submit" name="login_user" class="btn btn-primary" value="Login"/>
+									</div>
+									<div class="row">
+										<div class="col-md-4 col-md-offset-4 text-center">	
+										New User? <a href="#" onclick="$('#id01').modal('hide')" data-toggle="modal" data-target="#id02"> Register</a>
+										</div>
 									</div>
 								</fieldset>
 							</form>
@@ -129,50 +140,43 @@
 						<br>
 
 						<div class="cari-nama">
-							<input type="submit" value="Search" style="float: right; width: 24%" id="btnfind" name="" class="btn-primary form-control">
 							<div style="overflow: hidden; ">
+								<b>Kecamatan :</b>
 								<input type="text" style="width: 98%;" list="find" id="inputname" name="" class="form-control" placeholder="Nama Kecamatan...">
 								<datalist id="find">
 									<option value="LUBUK SIKARAH"></option>
 									<option value="TANJUNG HARAPAN"></option>
 								</datalist>
 							</div>
+							<input type="submit" value="Search" style="float: right; width: 24%" id="btnfind" name="" class="btn-primary form-control">
 						</div>
-
-						<hr>
 
 						<div>
 							<div style="padding-top: 10px">
-								<b>Desa/Kelurahan :</b>
-								<input list="listdata" id="starts" class="form-control" value="" onchange="getArea()">
-									<datalist id="listdata">
-									</datalist>
+								<div style="overflow: hidden; ">
+									<b>Desa/Kelurahan :</b>
+									<input list="listdata" id="starts" style="width: 100%;" class="form-control" value="" onchange="getArea()">
+										<datalist id="listdata">
+										</datalist>
+								</div>
 							</div>
-							<div style="padding-top: 15px; float: right;">
-								<input type="submit" id="submit" value="Submit" style="float: right; width: 100%" class="btn-primary form-control">
-							</div>
+							<input type="submit" id="submit" value="Submit" style="float: right; width: 24%" class="btn-primary form-control">
 						</div>
 
 						<hr>
 
 						<div class="form" name="form-update" style="padding-top: 10px">
-							<form method="post" action="update.php">
-								<div class="form-group">
-									<input type="hidden" id="form-gid" name="gid" value=""/>
-									<label for="name">Kecamatan </label>
-									<input id="form-kec" type="text" name="kecamatan" readonly value="" class="form-control"/>
-								</div>
-								<div class="form-group">
-									<label for="name">Desa/Kelurahan </label>
-									<input id="form-desa" type="text" name="nama" readonly value="" class="form-control"/>
-								</div>
+							<form method="post" target="blank" action="update.php">
+								<input id="form-gid" type="hidden" name="gid" value=""/>
+								<input id="form-kec" type="hidden" name="kecamatan" value="" class="form-control"/>
+								<input id="form-desa" type="hidden" name="nama" value="" class="form-control"/>
 								<div class="form-group">
 									<label for="name">NJOP </label>
 									<input id="form-njop" type="text" name="njop" readonly value="" class="form-control"/>
 								</div>
 								<div class="form-group">
-									<input type="submit" name="bphtb" class="btn btn-info" value="Lihat BPHTB" />
-									<input type="submit" name="pph" class="btn btn-info" value="Lihat PPH" style="float: right"/>
+									<input type="submit" name="bphtb" class="btn btn-default" value="Lihat BPHTB" />
+									<input type="submit" name="pph" class="btn btn-default" value="Lihat PPH" style="float: right"/>
 								</div>
 							</form>
 						</div>
@@ -187,11 +191,15 @@
 			<script>
 				var fillIdx = 0;
 				var fills = [
-				'#22A164',
-				'#00005E',
-				'#3C0D68',
-				'#FB3837',
-				'#22A164',
+				'#d4ffd2',
+				'#d3ffa8',
+				'#abfd5d',
+				'#88ac2e',
+				'#60a93e',
+				'#5b8436',
+				'#315c2f',
+				'#5b5930',
+				'#5a3334',
 				];
 				
 				google.maps.Polygon.prototype.getBounds = function() {
@@ -208,7 +216,7 @@
 				}
 
 				var transform = function(multipolygon, map, nama, q, njop, gid) {
-					var geojson = ''
+				var geojson = ''
 					try {
 						var geojson = Terraformer.WKT.parse(multipolygon)
 						geojson = geojson.toGeographic()
@@ -226,7 +234,8 @@
 						// This map() only transforms the data.
 							_.each(_.map(polygon, function(point) {
 							// Important: the lat/lng are vice-versa in GeoJSON
-							return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
+							// return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
+							return new google.maps.LatLng(point[1], point[0]);
 						}), function(point) {
 							list.push(point);
 						});
@@ -235,10 +244,40 @@
 						}, []);
 					});
 
-					fillIdx = (fillIdx >= fills.length) ? 0 : fillIdx + 1;
+					// console.log(njop);
+
+					if(njop<=100000){
+						fillIdx = 0;
+					}
+					else if(njop>100000 && njop<=200000){
+						fillIdx = 1;
+					}
+					else if(njop>200000 && njop<=500000){
+						fillIdx = 2;
+					}
+					else if(njop>500000 && njop<=1000000){
+						fillIdx = 3;
+					}
+					else if(njop>1000000 && njop<=2000000){
+						fillIdx = 4;
+					}
+					else if(njop>2000000 && njop<=5000000){
+						fillIdx = 5;
+					}
+					else if(njop>5000000 && njop<=10000000){
+						fillIdx = 6;
+					}
+					else if(njop>10000000 && njop<=20000000){
+						fillIdx = 7;
+					}
+					else if(njop>=20000000){
+						fillIdx = 8;
+					}
+
+					
 					var polygon = new google.maps.Polygon({
 						paths: paths,
-						strokeWeight: 0,
+						strokeWeight: 1,
 						fillColor: fills[fillIdx],
 						fillOpacity: 0.90
 					});
@@ -303,7 +342,7 @@
 				up206b.initialize = function()
 				{
 					var myOptions = {
-						center: {lat: -0.7900853, lng: 100.6488506}, zoom: 15
+						center: {lat: -0.7900853, lng: 100.6488506}, zoom: 17 
 					};
 					map = new google.maps.Map(document.getElementById("map"), myOptions);
 				}
@@ -367,7 +406,7 @@
 									document.getElementById("starts").value = "";
 									var i;
 									for(i = 0; i < data['list'].length; i++) {
-										var polygon=transform(data['list'][i]['area']);
+										var polygon=transform(data['list'][i]['area'], map, data['list'][i]['nama'], inputname.value, data['list'][i]['njop'], data['list'][i]['gid']);
 										polygon.setMap(map);
 									}
 
@@ -387,10 +426,6 @@
 							btnfindname();
 						}
 					});
-
-					var directionsService = new google.maps.DirectionsService;
-					var directionsDisplay = new google.maps.DirectionsRenderer;
-					directionsDisplay.setMap(map);
 				}
 				google.maps.event.addDomListener(window, 'load', initialize);
 			</script>

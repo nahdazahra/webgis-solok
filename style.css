@@ -1,6 +1,6 @@
 
 .wrap{
-  height: auto;
+  height: 700px;
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
@@ -10,7 +10,7 @@
   font-family: sans-serif;
 }
 .wrap .body-content .sidebar{
-  /*background-color: white;*/
+  background-color: lightsteelblue;
   float: left;
   width: 25%;
   height: 100%;
@@ -19,6 +19,7 @@
   float: left;
   height: 100%;
 }
+
 /* .wrap .footer{
   background: FloralWhite;
   border-top: solid 1px;
