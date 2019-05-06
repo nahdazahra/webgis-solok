@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Zona Nilai Tanah Kota Solok</title>
+		<title>Peta Zona Nilai Tanah Kota Solok</title>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" >
 
 		<!-- Bootstrap dan CSS untuk tampilan -->
@@ -29,12 +29,13 @@
 		<script src="https://unpkg.com/terraformer-arcgis-parser@1.0.5"></script>
 		<script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
 	</head>
+	
 	<body onload="up206b.initialize()">
 		<div class="wrap" style="height: 800px">
 			<nav class="navbar-default " role="navigation" style="background-color: #c1c1c1">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#"><b>Zona Nilai Tanah Kota Solok</b></a>
+						<a class="navbar-brand" href="#"><b>Peta Zona Nilai Tanah Kota Solok</b></a>
 					</div>
 					<ul class="nav navbar-nav navbar-right" >
 					<?php if (isset($_SESSION['usr_id'])) { header('Location:dashboard.php'); } else { ?>
@@ -145,7 +146,7 @@
 							<div style="overflow: hidden; ">
 								<b>Kecamatan :</b>
 								<select id="inputname" style="width: 70%;">
-									<option value="" disabled>Pilih Kecamatan</option>
+									<option value="" selected disabled>Pilih Kecamatan</option>
 									<option value="LUBUK SIKARAH">LUBUK SIKARAH</option>
 									<option value="TANJUNG HARAPAN">TANJUNG HARAPAN</option>
 								</select>
@@ -165,7 +166,7 @@
 
 						<hr>
 
-						<div class="form" name="form-update" style="padding-top: 10px">
+						<div class="form" name="form-update" >
 							<form method="post" target="blank" action="update.php">
 								<input id="form-gid" type="hidden" name="gid" value=""/>
 								<input id="form-kec" type="hidden" name="kecamatan" value="" class="form-control"/>

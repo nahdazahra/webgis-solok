@@ -1,20 +1,30 @@
 <?php
-@session_start();
+  require_once('config.php');
+	@session_start();
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>Peta Zona Nilai Tanah Kota Solok</title>
 		<meta content="width=device-width, initial-scale=1.0" name="viewport" >
+
+		<!-- Bootstrap dan CSS untuk tampilan -->
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script type="text/javascript" src="js/bootstrap.js"></script>
     <script data-require="jquery@*" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script data-require="bootstrap@3.3.6" data-semver="3.3.6" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.css" rel="stylesheet"/>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.js"></script>
+		
+		<!-- Javascript untuk modal form -->
 		<script src="script.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAxgh83y8vSI1-91nTOTDiUfQUmWmpcfRU&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+		<!-- API Google Maps -->
+		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAxgh83y8vSI1-91nTOTDiUfQUmWmpcfRU&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
+		
+		<!-- API terraformer untuk generate geom ke lat-lng-->
 		<script src="https://underscorejs.org/underscore.js"></script>
 		<script src="https://unpkg.com/terraformer@1.0.8"></script>
 		<script src="https://unpkg.com/terraformer-arcgis-parser@1.0.5"></script>
@@ -81,23 +91,37 @@
 							<h4 class="modal-title">Daftar Administrator</h4>
 						</div>
 						<div class="modal-body" id="myModalBody2">
-							<form method="post" action="register_content.php">
-								<div class="form-group">
-									<label for="name">Terakhir diubah </label>
-									<input readonly type="text" name="tgl_npoptkp" class="form-control"/>
+							<table class="table table-striped">                     
+								<div class="table responsive">
+									<thead>
+											<tr>
+												<th>No</th>
+												<th>NIP</th>
+												<th>Nama</th>
+												<th>Email</th>
+											</tr>
+									</thead>
+									<tbody>
+										<?php
+										$sql="SELECT nip, nama, email FROM public.admin ORDER BY nama ASC";
+										$result = pg_query($sql);
+										// echo($result);
+										if (pg_fetch_array($result) > 0) {
+											// output data of each row
+											while(pg_fetch_array($result)) {
+												echo '<tr>
+																<td scope="row">' . $row["nip"]. '</td>
+																<td>' . $row["nama"] .'</td>
+																<td> '.$row["email"] .'</td>
+															</tr>';
+											}
+										} else {
+											echo "0 results";
+										} 
+										?>
+									</tbody>
 								</div>
-								<div class="form-group">
-									<label for="name">NPOPTKP saat ini </label>
-									<input readonly type="text" name="npoptkp" class="form-control" />
-								</div>
-								<div class="form-group">
-									<label for="name">NPOPTKP baru </label>
-									<input type="text" name="u_npoptkp" class="form-control" />
-								</div>
-								<div class="form-group">
-									<input type="submit" name="upd_npoptkp" class="btn btn-primary" value="Simpan"/>
-								</div>
-							</form>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -130,7 +154,7 @@
 							<div style="overflow: hidden; ">
 								<b>Kecamatan :</b>
 								<select id="inputname" style="width: 70%;">
-									<option value="" disabled>Pilih Kecamatan</option>
+								<option value="" selected disabled>Pilih Kecamatan</option>
 									<option value="LUBUK SIKARAH">LUBUK SIKARAH</option>
 									<option value="TANJUNG HARAPAN">TANJUNG HARAPAN</option>
 								</select>
@@ -150,7 +174,7 @@
 
 						<hr>
 
-						<div class="form" name="form-update" style="padding-top: 10px">
+						<div class="form" name="form-update" >
 							<form method="post" target="blank" action="update.php">
 								<input id="form-gid" type="hidden" name="gid" value=""/>
 								<input id="form-kec" type="hidden" name="kecamatan" value="" class="form-control"/>
@@ -174,6 +198,24 @@
 			</div>
 
 			<script>
+				$('.select2').select2({
+					templateResult: function (data) {    
+						// We only really care if there is an element to pull classes from
+						if (!data.element) {
+							return data.text;
+						}
+
+						var $element = $(data.element);
+
+						var $wrapper = $('<span></span>');
+						$wrapper.addClass($element[0].className);
+
+						$wrapper.text(data.text);
+
+						return $wrapper;
+					}
+				});
+				
 				var fillIdx = 0;
 				var fills = [
 				'#d4ffd2',
@@ -390,7 +432,7 @@
 
 									for (i=0; i<data['nama'].length; i++) {
 										nama=data['nama'][i].nama;
-										document.getElementById("inputname").innerHTML += "<option value='"+nama+"'>";
+										document.getElementById("starts").innerHTML += "<option value='"+nama+"'>"+nama+"</option>";
 									}
 									map.fitBounds(polygon.getBounds());
 								}
