@@ -88,14 +88,13 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title">Daftar Administrator</h4>
+							<h3 class="modal-title">Daftar Administrator</h3>
 						</div>
 						<div class="modal-body" id="myModalBody2">
 							<table class="table table-striped">                     
 								<div class="table responsive">
 									<thead>
 											<tr>
-												<th>No</th>
 												<th>NIP</th>
 												<th>Nama</th>
 												<th>Email</th>
@@ -105,10 +104,10 @@
 										<?php
 										$sql="SELECT nip, nama, email FROM public.admin ORDER BY nama ASC";
 										$result = pg_query($sql);
-										// echo($result);
-										if (pg_fetch_array($result) > 0) {
+										if ($result > 0) {
+											echo($row);
 											// output data of each row
-											while(pg_fetch_array($result)) {
+											while($row = pg_fetch_array($result)) {
 												echo '<tr>
 																<td scope="row">' . $row["nip"]. '</td>
 																<td>' . $row["nama"] .'</td>
