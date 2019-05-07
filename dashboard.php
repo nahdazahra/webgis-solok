@@ -194,7 +194,7 @@
 								<div class="form-group">
 									<input type="submit" name="bphtb" class="btn btn-info" value="Lihat BPHTB" />
 									<input type="submit" name="pph" class="btn btn-info" value="Lihat PPH" />
-									<input type="submit" name="update" class="btn btn-success" value="Update" style="float: right"/>
+									<button type="submit" name="update" class="btn btn-success" id="btn-upd" style="float: right">Update</button>
 								</div>
 							</form>
 						</div>
@@ -267,6 +267,26 @@
 			</div>
 
 			<script>
+				$('#btn-upd').click(function(){
+					$.ajax({
+							url: "update.php",
+							dataType: 'json',
+							method: 'POST',
+							data: {
+								update: 'Update',
+								gid: document.getElementById("form-njop").value,
+								njop: document.getElementById("form-njop").value
+							},
+							error: function(data){
+								alert('Data does not exist!');
+								return;
+							},
+							success: function(data){
+								alert('NJOP berhasil diubah!');
+							}
+						});
+				});
+
 				$('.select2').select2({
 					templateResult: function (data) {    
 						// We only really care if there is an element to pull classes from

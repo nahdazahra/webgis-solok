@@ -184,64 +184,63 @@
 						
 						<hr>
 
-						<div id="leftsideMenu">
-							<ul style="list-style-type:none">
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai sampai 100.000" />
-										<div class="color-box" style="background-color: #d4ffd2;"></div>
-									</div>
-								</li>
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai 100.000 - 200.000" />
-										<div class="color-box" style="background-color: #d3ffa8;"></div>
-									</div>
-								</li>
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai 200.000 - 500.000" />
-										<div class="color-box" style="background-color: #abfd5d;"></div>
-									</div>
-								</li>
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai 500.000 - 1.000.000" />
-										<div class="color-box" style="background-color: #88ac2e;"></div>
-									</div>
-								</li>
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai 1.000.000 - 2.000.000" />
-										<div class="color-box" style="background-color: #60a93e;"></div>
-									</div>
-								</li>
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai 2.000.000 - 5.000.000" />
-										<div class="color-box" style="background-color: #5b8436;"></div>
-									</div>
-								</li>
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai 5.000.000 - 10.000.000" />
-										<div class="color-box" style="background-color: #315c2f;"></div>
-									</div>
-								</li>
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai 10.000.000 - 20.000.000" />
-										<div class="color-box" style="background-color: #5b5930;"></div>
-									</div>
-								</li>
-								<li>
-									<div class="input-color">
-										<input type="text" style="width:90%" value="Nilai lebih dari 20.000.000" />
-										<div class="color-box" style="background-color: #5a3334;"></div>
-									</div>
-								</li>
-							</ul>
+						<div id="leftsideMenu" style="list-style-type:none">
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="0">Nilai sampai 100.000</button>
+									<div class="color-box" style="background-color: #d4ffd2;"></div>
+								</div>
+							</li>
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="1">Nilai 100.000 - 200.000</button>
+									<div class="color-box" style="background-color: #d3ffa8;"></div>
+								</div>
+							</li>
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="2">Nilai 200.000 - 500.000</button>
+									<div class="color-box" style="background-color: #abfd5d;"></div>
+								</div>
+							</li>
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="3">Nilai 500.000 - 1.000.000</button>
+									<div class="color-box" style="background-color: #88ac2e;"></div>
+								</div>
+							</li>
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="4">Nilai 1.000.000 - 2.000.000</button>
+									<div class="color-box" style="background-color: #60a93e;"></div>
+								</div>
+							</li>
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="5">Nilai 2.000.000 - 5.000.000</button>
+									<div class="color-box" style="background-color: #5b8436;"></div>
+								</div>
+							</li>
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="6">Nilai 5.000.000 - 10.000.000</button>
+									<div class="color-box" style="background-color: #315c2f;"></div>
+								</div>
+							</li>
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="7">Nilai 10.000.000 - 20.000.000</button>
+									<div class="color-box" style="background-color: #5b5930;"></div>
+								</div>
+							</li>
+							<li>
+								<div class="input-color">
+									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="8">Nilai lebih dari 20.000.000</button>
+									<div class="color-box" style="background-color: #5a3334;"></div>
+								</div>
+							</li>
 						</div>
+
 					</div>
 				</div>
 
@@ -250,6 +249,11 @@
 			</div>
 
 			<script>
+				$('.btn-clr').click(function(){
+					console.log($(this).attr('value'));
+					getArea($(this).attr('value'));
+				});
+
 				$('.select2').select2({
 					templateResult: function (data) {    
 						// We only really care if there is an element to pull classes from
@@ -426,11 +430,12 @@
 					map = new google.maps.Map(document.getElementById("map"), myOptions);
 				}
 
-				var getArea = function(){
+				var getArea = function(color=''){
 					var markers = [];
 					var infowindow = [];
+					console.log(color);
 					$.ajax({
-							url: "common.php?q="+inputname.value+"&desa="+starts.value,
+							url: "common.php?q="+inputname.value+"&desa="+starts.value+"&zona="+color,
 							dataType: 'json',
 							method: 'GET',
 							error: function(data){
@@ -485,6 +490,7 @@
 										polygon.setMap(map);
 									}
 
+									document.getElementById("starts").innerHTML += "<option value='' selected disabled>-- PILIH DESA --</option>";
 									for (i=0; i<data['nama'].length; i++) {
 										nama=data['nama'][i].nama;
 										document.getElementById("starts").innerHTML += "<option value='"+nama+"'>"+nama+"</option>";
@@ -496,8 +502,9 @@
 					}
 
 					document.getElementById("inputname").addEventListener("change", findname);
-					document.getElementById("starts").addEventListener("change", getArea);
-
+					$("#starts").change(function(){
+						getArea('');
+					});
 					// $("#inputname").on("select2:selecting", findname);
 					// $("#starts").on("select2:selecting", getArea);
 
