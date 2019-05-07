@@ -142,32 +142,30 @@
 					<div class="container" style="width:100%; height: 100%; overflow:auto; float:left; padding-left:10px; padding-right:10px;">
 						<br>
 
-						<div class="cari-nama">
-							<div style="overflow: hidden; ">
-								<b>Kecamatan :</b>
-								<select id="inputname" style="width: 70%;">
-									<option value="" selected disabled>Pilih Kecamatan</option>
-									<option value="LUBUK SIKARAH">LUBUK SIKARAH</option>
-									<option value="TANJUNG HARAPAN">TANJUNG HARAPAN</option>
-								</select>
-							</div>
-						</div>
-
-						<div>
-							<div style="padding-top: 10px">
-								<div style="overflow: hidden; ">
-									<b>Desa/Kelurahan :</b>
-									<select id="starts" >
-										<option value="" disabled>Pilih Kecamatan terlebih dahulu</option>
-									</select>
-								</div>
-							</div>
-						</div>
-
-						<hr>
-
 						<div class="form" name="form-update" >
-							<form method="post" action="update.php">
+							<form method="post" target="blank" action="update.php">
+								<div class="cari-nama">
+									<div style="overflow: hidden; ">
+										<b>Kecamatan :</b>
+										<select id="inputname" style="width: 70%;" required>
+											<option value="" selected disabled>Pilih Kecamatan</option>
+											<option value="LUBUK SIKARAH">LUBUK SIKARAH</option>
+											<option value="TANJUNG HARAPAN">TANJUNG HARAPAN</option>
+										</select>
+									</div>
+								</div>
+								
+								<div style="padding-top: 10px">
+									<div style="overflow: hidden; ">
+										<b>Desa/Kelurahan :</b>
+										<select id="starts" required>
+											<option value="" disabled>Pilih Kecamatan terlebih dahulu</option>
+										</select>
+									</div>
+								</div>
+
+								<hr>
+
 								<input id="form-gid" type="hidden" name="gid" value=""/>
 								<input id="form-kec" type="hidden" name="kecamatan" value="" class="form-control"/>
 								<input id="form-desa" type="hidden" name="nama" value="" class="form-control"/>
@@ -176,13 +174,11 @@
 									<input id="form-njop" type="text" name="njop" readonly value="" class="form-control"/>
 								</div>
 								<div class="form-group">
-									<input type="submit" target="blank" name="bphtb" class="btn btn-default" value="Lihat BPHTB" />
-									<input type="submit" target="blank" name="pph" class="btn btn-default" value="Lihat PPH" style="float: right"/>
+									<input type="submit" name="bphtb" class="btn btn-info" value="Lihat BPHTB" />
+									<input type="submit" name="pph" class="btn btn-info" value="Lihat PPH" style="float: right" />
 								</div>
 							</form>
 						</div>
-						
-						<hr>
 
 						<div id="leftsideMenu" style="list-style-type:none">
 							<li>
@@ -249,6 +245,49 @@
 			</div>
 
 			<script>
+
+				$('#btn-log').click(function(){
+					$.ajax({
+							url: "update.php",
+							dataType: 'json',
+							method: 'POST',
+							data: {
+								'update': 'Update',
+								'gid': document.getElementById("form-gid").value,
+								'njop': document.getElementById("form-njop").value
+							},
+							error: function(data){
+								alert('NJOP gagal diubah!');
+								return;
+							},
+							success: function(data){
+								alert('NJOP berhasil diubah!');
+								getArea('');
+							}
+						});
+				});
+				
+				$('#btn-reg').click(function(){
+					$.ajax({
+							url: "update.php",
+							dataType: 'json',
+							method: 'POST',
+							data: {
+								'update': 'Update',
+								'gid': document.getElementById("form-gid").value,
+								'njop': document.getElementById("form-njop").value
+							},
+							error: function(data){
+								alert('NJOP gagal diubah!');
+								return;
+							},
+							success: function(data){
+								alert('NJOP berhasil diubah!');
+								getArea('');
+							}
+						});
+				});
+				
 				$('.btn-clr').click(function(){
 					console.log($(this).attr('value'));
 					getArea($(this).attr('value'));

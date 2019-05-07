@@ -158,47 +158,45 @@
 					<div class="container" style="width:100%; height: 100%; overflow:auto; float:left; padding-left:10px; padding-right:10px;">
 						<br>
 
-						<div class="cari-nama">
-							<div style="overflow: hidden; ">
-								<b>Kecamatan :</b>
-								<select id="inputname" style="width: 70%;">
-								<option value="" selected disabled>Pilih Kecamatan</option>
-									<option value="LUBUK SIKARAH">LUBUK SIKARAH</option>
-									<option value="TANJUNG HARAPAN">TANJUNG HARAPAN</option>
-								</select>
-							</div>
-						</div>
-
-						<div>
-							<div style="padding-top: 10px">
-								<div style="overflow: hidden; ">
-									<b>Desa/Kelurahan :</b>
-									<select id="starts" >
-										<option value="" disabled>Pilih Kecamatan terlebih dahulu</option>
-									</select>
-								</div>
-							</div>
-						</div>
-
-						<hr>
-
 						<div class="form" name="form-update" >
-							<form method="post" action="update.php">
+							<form method="post" target="blank" action="update.php">
+								<div class="cari-nama">
+									<div style="overflow: hidden; ">
+										<b>Kecamatan :</b>
+										<select id="inputname" style="width: 70%;" required>
+											<option value="" selected disabled>Pilih Kecamatan</option>
+											<option value="LUBUK SIKARAH">LUBUK SIKARAH</option>
+											<option value="TANJUNG HARAPAN">TANJUNG HARAPAN</option>
+										</select>
+									</div>
+								</div>
+								
+								<div style="padding-top: 10px">
+									<div style="overflow: hidden; ">
+										<b>Desa/Kelurahan :</b>
+										<select id="starts" required>
+											<option value="" disabled>Pilih Kecamatan terlebih dahulu</option>
+										</select>
+									</div>
+								</div>
+
+								<hr>
+
 								<input id="form-gid" type="hidden" name="gid" value=""/>
 								<input id="form-kec" type="hidden" name="kecamatan" value="" class="form-control"/>
 								<input id="form-desa" type="hidden" name="nama" value="" class="form-control"/>
 								<div class="form-group">
 									<label for="name">NJOP </label>
-									<input id="form-njop" type="text" name="njop" value="" class="form-control"/>
+									<input id="form-njop" type="text" name="njop" readonly value="" class="form-control"/>
 								</div>
 								<div class="form-group">
-									<input type="submit" target="blank" name="bphtb" class="btn btn-info" value="Lihat BPHTB" />
-									<input type="submit" target="blank" name="pph" class="btn btn-info" value="Lihat PPH" />
+									<input type="submit" name="bphtb" class="btn btn-info" value="Lihat BPHTB" />
+									<input type="submit" name="pph" class="btn btn-info" value="Lihat PPH" />
 									<button type="button" name="update" class="btn btn-success" id="btn-upd" style="float: right">Update</button>
 								</div>
 							</form>
 						</div>
-						
+
 						<hr>
 
 						<div id="leftsideMenu" style="list-style-type:none">
@@ -286,7 +284,7 @@
 							}
 						});
 				});
-
+				
 				$('.btn-clr').click(function(){
 					console.log($(this).attr('value'));
 					getArea($(this).attr('value'));
