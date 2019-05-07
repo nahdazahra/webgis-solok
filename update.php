@@ -8,19 +8,17 @@
 		$ugid = $_POST["gid"];
 		$sql = "UPDATE public.znt_desa SET njop = '$unjop' WHERE gid = '$ugid'" ;
 		$result = pg_query($sql);
-    
     if(! $result ) {
 			die('Could not update data: ' . pg_error());
-    }
-		header('Location: dashboard.php');
+		}
+		echo 'true';
 	}
 
 	else if(isset($_POST['upd_npoptkp'])){
 		$unpoptkp = $_POST['unpoptkp'];
-		
-		$upd_npoptkp = "UPDATE public.npoptkp SET nilai = '$unpoptkp'" ;
+		$upd_npoptkp = "UPDATE public.npoptkp SET nilai = '$unpoptkp', date = CURRENT_DATE" ;
 		$result = pg_query($upd_npoptkp);
-		
+
     if(! $result ) {
 			die('Could not update data: ' . pg_error());
 			echo 'fail';

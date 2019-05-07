@@ -167,7 +167,7 @@
 						<hr>
 
 						<div class="form" name="form-update" >
-							<form method="post" target="blank" action="update.php">
+							<form method="post" action="update.php">
 								<input id="form-gid" type="hidden" name="gid" value=""/>
 								<input id="form-kec" type="hidden" name="kecamatan" value="" class="form-control"/>
 								<input id="form-desa" type="hidden" name="nama" value="" class="form-control"/>
@@ -176,8 +176,8 @@
 									<input id="form-njop" type="text" name="njop" readonly value="" class="form-control"/>
 								</div>
 								<div class="form-group">
-									<input type="submit" name="bphtb" class="btn btn-default" value="Lihat BPHTB" />
-									<input type="submit" name="pph" class="btn btn-default" value="Lihat PPH" style="float: right"/>
+									<input type="submit" target="blank" name="bphtb" class="btn btn-default" value="Lihat BPHTB" />
+									<input type="submit" target="blank" name="pph" class="btn btn-default" value="Lihat PPH" style="float: right"/>
 								</div>
 							</form>
 						</div>
@@ -505,8 +505,6 @@
 					$("#starts").change(function(){
 						getArea('');
 					});
-					// $("#inputname").on("select2:selecting", findname);
-					// $("#starts").on("select2:selecting", getArea);
 
 				}
 				google.maps.event.addDomListener(window, 'load', initialize);
