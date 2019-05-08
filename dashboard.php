@@ -187,7 +187,7 @@
 								<input id="form-desa" type="hidden" name="nama" value="" class="form-control"/>
 								<div class="form-group">
 									<label for="name">NJOP </label>
-									<input id="form-njop" type="text" name="njop" readonly value="" class="form-control"/>
+									<input id="form-njop" type="text" name="njop" value="" class="form-control"/>
 								</div>
 								<div class="form-group">
 									<input type="submit" name="bphtb" class="btn btn-info" value="Lihat BPHTB" />
