@@ -10,14 +10,14 @@
   font-family: sans-serif;
 }
 .wrap .body-content .sidebar{
-  background-color: lightsteelblue;
+  background-color: #d3fbae;
   float: left;
   width: 25%;
   height: 100%;
 }
 .wrap .body-content #map{
   float: left;
-  height: 100%;
+  height: 92%;
 }
 
 .input-color {

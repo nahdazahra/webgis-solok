@@ -33,125 +33,23 @@
 
 	<body onload="up206b.initialize()">
 		<div class="wrap" style="1000px">
-			<nav class="navbar-inverse" role="navigation">
+			<nav class="navbar-default" role="navigation" style="background-color: #5cb85c">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="#"><b>Peta Zona Nilai Tanah Kota Solok</b></a>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
-					<?php if (isset($_SESSION['usr_id'])) { ?>
+					<?php if (isset($_SESSION['usr_name'])) { ?>
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">Signed in as <b><?php echo $_SESSION['usr_name']; ?></b>!<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a data-toggle="modal" data-target="#up_npoptkp" class="modal-btn">Ubah NPOPTKP</a></li>	
-								<li><a data-toggle="modal" data-target="#list_admin" class="modal-btn">Daftar Admin</a></li>
 								<li><a href="logout.php">Logout</a></li>
 							</ul>
 						</li>
-					<?php } else { header('Location:index.php'); } ?>
+					<?php } else { header('Location:main.php'); } ?>
 					</ul>
 				</div>
 			</nav>
-
-			<div id="up_npoptkp" class="modal fade" aria-labelledby="myModalLabel" aria-hidden="true" tabindex="-1" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title">Ubah Nilai NPOPTKP</h4>
-						</div>
-						<div class="modal-body" id="myModalBody1">
-							<form method="post" action="update.php">
-								<div class="form-group">
-									<label for="name">Terakhir diubah </label>
-									<?php
-										$sql="SELECT date FROM public.npoptkp";
-										$result = pg_query($sql);
-										$row = pg_fetch_array($result);
-										echo '<input readonly type="text" name="tgl_npoptkp" class="form-control" value="'.$row["date"].'"/>'
-									?>
-								</div>
-								<div class="form-group">
-									<label for="name">NPOPTKP saat ini </label>
-									<?php
-										$sql="SELECT nilai FROM public.npoptkp";
-										$result = pg_query($sql);
-										$row = pg_fetch_array($result);
-										echo '<input readonly type="text" name="npoptkp" class="form-control" value="'.$row["nilai"].'"/>'
-									?>
-								</div>
-								<div class="form-group">
-									<label for="name">NPOPTKP baru </label>
-									<input type="text" name="unpoptkp" class="form-control" />
-								</div>
-								<div class="form-group">
-									<input type="submit" name="upd_npoptkp" class="btn btn-primary" value="Simpan"/>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="list_admin" class="modal fade" aria-labelledby="myModalLabel" aria-hidden="true" tabindex="-1" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h3 class="modal-title">Daftar Administrator</h3>
-						</div>
-						<div class="modal-body" id="myModalBody2">
-							<table class="table table-striped">                     
-								<div class="table responsive">
-									<thead>
-											<tr>
-												<th>NIP</th>
-												<th>Nama</th>
-												<th>Email</th>
-											</tr>
-									</thead>
-									<tbody>
-										<?php
-										$sql="SELECT nip, nama, email FROM public.admin ORDER BY nama ASC";
-										$result = pg_query($sql);
-										if ($result > 0) {
-											// output data of each row
-											while($row = pg_fetch_array($result)) {
-												echo '<tr>
-																<td scope="row">' . $row["nip"]. '</td>
-																<td>' . $row["nama"] .'</td>
-																<td> '.$row["email"] .'</td>
-															</tr>';
-											}
-										} else {
-											echo "0 results";
-										} 
-										?>
-									</tbody>
-								</div>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<script>
-			// Get the modal
-			var modal1 = document.getElementById('list_admin');
-			var modal2 = document.getElementById('up_npoptkp');
-	
-			// When the user clicks anywhere outside of the modal, close it
-			window.onclick = function(event) {
-				if (event.target == modal1) {
-					modal1.style.display = "none";
-				}
-			}
-			window.onclick = function(event) {
-				if (event.target == modal2) {
-					modal2.style.display = "none";
-				}
-			}
-			</script>
 
 			<div class="body-content">
 				<div class="sidebar" >
@@ -202,55 +100,55 @@
 						<div id="leftsideMenu" style="list-style-type:none">
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="0">Nilai sampai 100.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="0">Nilai sampai 100.000</button>
 									<div class="color-box" style="background-color: #d4ffd2;"></div>
 								</div>
 							</li>
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="1">Nilai 100.000 - 200.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="1">Nilai 100.000 - 200.000</button>
 									<div class="color-box" style="background-color: #d3ffa8;"></div>
 								</div>
 							</li>
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="2">Nilai 200.000 - 500.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="2">Nilai 200.000 - 500.000</button>
 									<div class="color-box" style="background-color: #abfd5d;"></div>
 								</div>
 							</li>
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="3">Nilai 500.000 - 1.000.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="3">Nilai 500.000 - 1.000.000</button>
 									<div class="color-box" style="background-color: #88ac2e;"></div>
 								</div>
 							</li>
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="4">Nilai 1.000.000 - 2.000.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="4">Nilai 1.000.000 - 2.000.000</button>
 									<div class="color-box" style="background-color: #60a93e;"></div>
 								</div>
 							</li>
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="5">Nilai 2.000.000 - 5.000.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="5">Nilai 2.000.000 - 5.000.000</button>
 									<div class="color-box" style="background-color: #5b8436;"></div>
 								</div>
 							</li>
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="6">Nilai 5.000.000 - 10.000.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="6">Nilai 5.000.000 - 10.000.000</button>
 									<div class="color-box" style="background-color: #315c2f;"></div>
 								</div>
 							</li>
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="7">Nilai 10.000.000 - 20.000.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="7">Nilai 10.000.000 - 20.000.000</button>
 									<div class="color-box" style="background-color: #5b5930;"></div>
 								</div>
 							</li>
 							<li>
 								<div class="input-color">
-									<button class="btn btn-primary btn-clr" type="text" style="width:100%" value="8">Nilai lebih dari 20.000.000</button>
+									<button class="btn btn-success btn-clr" type="text" style="width:100%" value="8">Nilai lebih dari 20.000.000</button>
 									<div class="color-box" style="background-color: #5a3334;"></div>
 								</div>
 							</li>
@@ -335,26 +233,17 @@
 				}
 
 				var transform = function(multipolygon, map, nama, q, njop, gid) {
-					var geojson = ''
-					try {
-						var geojson = Terraformer.WKT.parse(multipolygon)
-						geojson = geojson.toGeographic()
-					}
-					catch (e) {
-						geojson = e;
-						console.log('except');
-					}
 					
 					// console.log(JSON.stringify(geojson, undefined, 2));
 					var bounds = new google.maps.LatLngBounds();
 					
-					var paths = _.map(geojson.coordinates, function(entry) {
+					var paths = _.map(multipolygon, function(entry) {
 						return _.reduce(entry, function(list, polygon) {
 						// This map() only transforms the data.
 							_.each(_.map(polygon, function(point) {
 							// Important: the lat/lng are vice-versa in GeoJSON
-							return new google.maps.LatLng(point[1]-66.9168471248, point[0]+94.5075762852);
-							// return new google.maps.LatLng(point[1], point[0]);
+							
+							return new google.maps.LatLng(point[1], point[0]);
 						}), function(point) {
 							list.push(point);
 						});
@@ -404,12 +293,7 @@
 					}
 
 					var myLatlng = bounds.getCenter();
-
-					marker=new google.maps.Marker({
-						position: myLatlng, map: map, animation: google.maps.Animation.DROP
-					});
-					resultmarker.push(marker);
-					createInfoWindow(marker, nama, q, njop, gid);
+					createInfoWindow(polygon, nama, q, njop, gid, myLatlng);
 					return polygon;
 				};
 
@@ -441,12 +325,14 @@
 					}
 				}
 
-				var createInfoWindow = function(marker, nama, q, njop, gid){
+				var createInfoWindow = function(polygon, nama, q, njop, gid, myLatlng){
 						infowindow = new google.maps.InfoWindow();
-						google.maps.event.addListener(marker, 'click', function(){
+						google.maps.event.addListener(polygon, 'click', function(event){
 							infowindow.close();
 							infowindow.setContent("<b>Desa/Kelurahan</b> : "+nama+"<br><b>Kecamatan</b> : "+inputname.value+"<br><b>NJOP</b> : Rp "+njop);
-							infowindow.open(map, marker);
+							// infowindow.setPosition(myLatlng);
+							infowindow.setPosition(event.latLng);
+							infowindow.open(map);
 							document.getElementById("form-gid").value = gid;
 							document.getElementById("form-kec").value = q;
 							document.getElementById("form-desa").value = nama;
@@ -458,7 +344,7 @@
 				up206b.initialize = function()
 				{
 					var myOptions = {
-						center: {lat: -0.7900853, lng: 100.6488506}, zoom: 17
+						center: {lat: -0.7900853, lng: 100.6488506}, zoom: 14
 					};
 					map = new google.maps.Map(document.getElementById("map"), myOptions);
 				}

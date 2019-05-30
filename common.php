@@ -56,25 +56,43 @@
     elseif($zona==8){
       $bawah=20000000;
     }
-    // echo $zona; die();
+    
     $result = pg_query($sql);
     while($row = pg_fetch_array($result)){
       if($zona != ''){
-        // echo $atas, $bawah; die();
+        
         if($row['njop']<=$atas && $row['njop']>$bawah){
           $gid=$row['gid'];
           $nama=$row['nama'];
-          $area=$row['area'];
+          $area=substr($row['area'],15);
+          $area=substr($area,0,-3);
+          $area=explode(',', $area);
+          $arr=[];
+          $arr[0]=[];
+          $arr[0][0]=[];
+          foreach($area as $koor){
+            $koor = explode(' ', $koor);
+            $arr[0][0][] = $koor;
+          };
           $njop=$row['njop'];
-          $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$area,'njop'=>$njop);
+          $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$arr,'njop'=>$njop);
         }
       }
       else{
         $gid=$row['gid'];
         $nama=$row['nama'];
-        $area=$row['area'];
+        $area=substr($row['area'],15);
+        $area=substr($area,0,-3);
+        $area=explode(',', $area);
+        $arr=[];
+        $arr[0]=[];
+        $arr[0][0]=[];
+        foreach($area as $koor){
+          $koor = explode(' ', $koor);
+          $arr[0][0][] = $koor;
+        };
         $njop=$row['njop'];
-        $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$area,'njop'=>$njop);
+        $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$arr,'njop'=>$njop);
       }
     }
     
