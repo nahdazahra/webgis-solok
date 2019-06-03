@@ -6,7 +6,7 @@
 	if(isset($_POST['update'])) {
 		$unjop = $_POST["njop"];
 		$ugid = $_POST["gid"];
-		$sql = "UPDATE public.znt_desa SET njop = '$unjop' WHERE gid = '$ugid'" ;
+		$sql = "UPDATE public.znt_persil SET njop = '$unjop' WHERE gid = '$ugid'" ;
 		$result = pg_query($sql);
     if(! $result ) {
 			die('Could not update data: ' . pg_error());
@@ -27,10 +27,10 @@
     $desa = $_POST['nama'];
     $bphtb = 5/100*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-10000000);
 
-    $pdf->Cell(0,10,"Kecamatan : {$kec}",0,1);
-    $pdf->Cell(0,10,"Desa/Kelurahan : {$desa}",0,1);
-    $pdf->Cell(0,10,"BPHTB : Rp {$bphtb}",0,1);
-    $doc = "bphtb_".$gid."_".$kec."_".$desa.".pdf";
+    $pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
+    $pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
+    $pdf->Cell(0,15,"BPHTB : Rp {$bphtb}",0,1);
+    $doc = "bphtb_persil".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
 	}
@@ -51,7 +51,7 @@
 		$pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
 		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
 		$pdf->Cell(0,15,"PPH : Rp {$pph}",0,1);
-		$doc = "pph_".$gid."_".$kec."_".$desa.".pdf";
+		$doc = "pph_persil".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
 	}
@@ -72,7 +72,7 @@
 		$pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
 		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
 		$pdf->Cell(0,15,"PBB : Rp {$pbb}",0,1);
-		$doc = "pbb_".$gid."_".$kec."_".$desa.".pdf";
+		$doc = "pbb_persil".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
 	}

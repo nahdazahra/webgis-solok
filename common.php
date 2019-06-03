@@ -120,50 +120,50 @@
   }
   // desa persil
   if (isset($_GET['q2'])){
-    $sql = "SELECT gid, nama, st_astext(geom) As area, obj_id, njop, nir, luas_tanah, luas_bangunan FROM znt_persil WHERE obj_id = '$q'";
+    $sql = "SELECT gid, nama, st_astext(geom) As area, obj_id, njop, nir, luas_tanah, luas_bangunan FROM znt_persil WHERE obj_id = '$q2'";
     if(isset($_GET['desa2']) && $_GET['desa2']){
       $sql.=" AND nama = '$desa2'";
     }
 
-    if($zona==0){
+    if($zona2==0){
       $bawah=0;
       $atas=100000;
     }
-    elseif($zona==1){
+    elseif($zona2==1){
       $bawah=100000;
       $atas=200000;
     }
-    elseif($zona==2){
+    elseif($zona2==2){
       $bawah=200000;
       $atas=500000;
     }
-    elseif($zona==3){
+    elseif($zona2==3){
       $bawah=500000;
       $atas=1000000;
     }
-    elseif($zona==4){
+    elseif($zona2==4){
       $bawah=1000000;
       $atas=2000000;
     }
-    elseif($zona==5){
+    elseif($zona2==5){
       $bawah=2000000;
       $atas=5000000;
     }
-    elseif($zona==6){
+    elseif($zona2==6){
       $bawah=5000000;
       $atas=10000000;
     }
-    elseif($zona==7){
+    elseif($zona2==7){
       $bawah=10000000;
       $atas=20000000;
     }
-    elseif($zona==8){
+    elseif($zona2==8){
       $bawah=20000000;
     }
     
     $result = pg_query($sql);
     while($row = pg_fetch_array($result)){
-      if($zona != ''){
+      if($zona2 != ''){
         
         if($row['njop']<=$atas && $row['njop']>$bawah){
           $gid=$row['gid'];
