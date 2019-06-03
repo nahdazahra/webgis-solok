@@ -12,8 +12,6 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>SB Admin - Dashboard</title>
-
 		<!-- Custom fonts for this template-->
 		<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -62,14 +60,14 @@
 
 	<body onload="up206b.initialize()">
 		<div class="wrap" >
-			<nav class="navbar-default " role="navigation" style="background-color: #5cb85c">
+			<nav class="navbar-dark navbar-expand" role="navigation" style="background-color: #5cb85c">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index.php"><b>Peta Zona Nilai Tanah Kota Solok</b></a>
 					</div>
-					<ul class="nav navbar-nav navbar-right" >
-					<?php if (isset($_SESSION['usr_id'])) { header('Location:dashboard.php'); } else { ?>
-						<li><a data-toggle="modal" data-target="#id01" ><span class="glyphicon glyphicon-log-in modal-btn"></span> Masuk sebagai Administrator</a></li>
+					<ul class="navbar-nav navbar-right active" style="padding-right: 20px">
+					<?php if (isset($_SESSION['usr_name'])) { header('Location:dashboard.php'); } else { ?>
+						<li class="nav-item "><a role="button" class="nav-link " data-toggle="modal" data-target="#id01">Masuk sebagai Administrator <span class="glyphicon glyphicon-log-in modal-btn"></span></a></li>
 					<?php } ?>
 					</ul>
 				</div>
@@ -79,7 +77,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title">Masuk Akun Administrator</h4>
+							<h4 class="modal-title">Masuk sebagai Administrator</h4>
 						</div>
 						<div class="modal-body" id="myModalBody1">
 							<form role="form" method="post" action="login_content.php">
