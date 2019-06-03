@@ -12,11 +12,11 @@
 .wrap .body-content .sidebar{
   background-color: #d3fbae;
   float: left;
-  width: 25%;
+  width: 20%;
   height: 100%;
 }
 .wrap .body-content #map{
-  float: left;
+  float: right;
   height: 92%;
 }
 
@@ -27,8 +27,8 @@
   padding-left: 20px;
 }
 .input-color .color-box {
-  width: 23px;
-  height: 23px;
+  width: 13px;
+  height: 13px;
   display: inline-block;
   background-color: #ccc;
   position: absolute;

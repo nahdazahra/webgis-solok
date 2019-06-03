@@ -14,21 +14,6 @@
 		echo 'true';
 	}
 
-	else if(isset($_POST['upd_npoptkp'])){
-		$unpoptkp = $_POST['unpoptkp'];
-		$upd_npoptkp = "UPDATE public.npoptkp SET nilai = '$unpoptkp', date = CURRENT_DATE" ;
-		$result = pg_query($upd_npoptkp);
-
-    if(! $result ) {
-			die('Could not update data: ' . pg_error());
-			echo 'fail';
-		}
-		else{
-			echo 'success';
-			header('Location: dashboard.php');
-		}
-	}
-
 	else if (isset($_POST['bphtb'])) {
     // Instanciation of inherited class
     $pdf = new FPDF();
@@ -43,7 +28,7 @@
 		$gid = $_POST['gid'];
     $kec = $_POST['kecamatan'];
     $desa = $_POST['nama'];
-    $bphtb = 5/100*($_POST['njop']-$row['nilai']);
+    $bphtb = 5/100*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-10000000);
 
     $pdf->Cell(0,10,"Kecamatan : {$kec}",0,1);
     $pdf->Cell(0,10,"Desa/Kelurahan : {$desa}",0,1);
@@ -70,6 +55,27 @@
 		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
 		$pdf->Cell(0,15,"PPH : Rp {$pph}",0,1);
 		$doc = "pph_".$gid."_".$kec."_".$desa.".pdf";
+		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
+		$pdf->Output($doc, 'I');
+	}
+
+	else if (isset($_POST['pbb'])) {
+		// Instanciation of inherited class
+		$pdf = new FPDF();
+		$pdf->AliasNbPages();
+		$pdf->AddPage();
+    $pdf->SetFont('Helvetica','B',18);
+		$pdf->Cell(0,20,"Nilai PBB Zona Tanah Wilayah Kota Solok",1,1);
+
+		$gid = $_POST['gid'];
+		$kec = $_POST['kecamatan'];
+		$desa = $_POST['nama'];
+		$pbb = 1/1000*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-10000000);
+
+		$pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
+		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
+		$pdf->Cell(0,15,"PBB : Rp {$pbb}",0,1);
+		$doc = "pbb_".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
 	}
