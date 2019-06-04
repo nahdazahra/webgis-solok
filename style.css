@@ -1,6 +1,6 @@
 
 .wrap{
-  height: 700px;
+  height: 648px;
   width: 100%;
   margin: 0 auto;
 }
@@ -16,7 +16,7 @@
 }
 .wrap .body-content #map{
   float: right;
-  height: 92%;
+  height: 100%;
 }
 
 .input-color {

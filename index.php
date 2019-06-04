@@ -69,7 +69,7 @@
           <h2 class="text-white mt-0">Selamat datang di Website Peta Zona Nilai Tanah!</h2>
           <hr class="divider light my-4">
           <p class="text-white-50 mb-4">Di sini anda dapat menghitung Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB), Pajak Penghasilan (PPh), serta Pajak Bumi dan Bangunan (PBB) yang harus anda bayar ketika melakukan transaksi jual beli tanah dan atau bangunan di Kota Solok, Sumatera Barat. Anda juga dapat mengetahui kisaran harga tanah lho, sehingga anda dapat memperkirakan berapa biaya yang harus anda keluarkan untuk membeli tanah dan membayar pajak di daerah tersebut. Selamat mencoba dan semoga membantu!</p>
-          <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Lihat Peta!</a>
+          <a class="btn btn-light btn-xl js-scroll-trigger" href="main.php">Lihat Peta!</a>
         </div>
       </div>
     </div>

@@ -84,8 +84,7 @@
 			<div class="body-content">
 				<ul class="sidebar navbar-nav" style="width:100%; height: 100%; overflow:auto;">
 					<div class="container" style="width:100%; height: 100%; overflow:auto; float:left; padding-right:10px;">
-						<br>
-						<button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#znt_desa">Zona Tanah tiap Kelurahan</button>
+						<button type="button" class="btn" data-toggle="collapse" data-target="#znt_desa">Zona Tanah tiap Kelurahan</button>
 						<div id="znt_desa" class="collapse">
 							<div class="form" name="form-update" >
 								<form method="post" target="blank" action="update.php">
@@ -191,7 +190,7 @@
 						</div>
 
 						<br>
-						<button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#znt_persil">Zona Tanah Persil</button>
+						<button type="button" class="btn" data-toggle="collapse" data-target="#znt_persil">Zona Tanah Persil</button>
 						<div id="znt_persil" class="collapse">
 							<div class="form" name="form-update" >
 								<form method="post" target="blank" action="update_p.php">

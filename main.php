@@ -18,11 +18,10 @@
 		<!-- Page level plugin CSS-->
 		<link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
-		<!-- Custom styles for this template-->
-		<link href="css/sb-admin.css" rel="stylesheet">
-		
 		<!-- Bootstrap dan CSS untuk tampilan -->
+		<link href="css/sb-admin.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="style.css">
+
 		<script type="text/javascript" src="js/bootstrap.js"></script>
     <script data-require="jquery@*" data-semver="2.2.0" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link data-require="bootstrap@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -111,8 +110,7 @@
 			<div class="body-content">
 				<ul class="sidebar navbar-nav" style="width:100%; height: 100%; overflow:auto;">
 					<div class="container" style="width:100%; height: 100%; overflow:auto; float:left; padding-right:10px;">
-						<br>
-						<button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#znt_desa">Zona Tanah tiap Kelurahan</button>
+						<button type="button" class="btn btn-md" data-toggle="collapse" data-target="#znt_desa">Zona Tanah tiap Kelurahan</button>
 						<div id="znt_desa" class="collapse">
 							<div class="form" name="form-update" >
 								<form method="post" target="blank" action="update.php">
@@ -218,7 +216,7 @@
 						</div>
 
 						<br>
-						<button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#znt_persil">Zona Tanah Persil</button>
+						<button type="button" class="btn" data-toggle="collapse" data-target="#znt_persil">Zona Tanah Persil</button>
 						<div id="znt_persil" class="collapse">
 							<div class="form" name="form-update" >
 								<form method="post" target="blank" action="update_p.php">
