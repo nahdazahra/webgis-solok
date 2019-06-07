@@ -20,16 +20,23 @@
     $pdf->AliasNbPages();
     $pdf->AddPage();
 		$pdf->SetFont('Helvetica','B',18);
-		$pdf->Cell(0,20,"Nilai BPTBH Zona Tanah Wilayah Kota Solok",1,1);
+		$pdf->Cell(0,20,"Nilai BPHTB Zona Tanah Wilayah Kota Solok",1,1);
 		
 		$gid = $_POST['gid'];
     $kec = $_POST['kecamatan'];
     $desa = $_POST['nama'];
+		$nir = $_POST['nir'];
+		$tanah = $_POST['tanah'];
+		$bgn = $_POST['bgn'];
     $bphtb = 5/100*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-10000000);
 
-    $pdf->Cell(0,10,"Kecamatan : {$kec}",0,1);
-    $pdf->Cell(0,10,"Desa/Kelurahan : {$desa}",0,1);
-    $pdf->Cell(0,10,"BPHTB : Rp {$bphtb}",0,1);
+    $pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
+    $pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
+    $pdf->Cell(0,15,"BPHTB : Rp {$bphtb}",0,1);
+		$pdf->Cell(0,15,"NIR : Rp {$nir}",0,1);
+		$pdf->Cell(0,15,"Luas Tanah : {$tanah} ",0,1);
+		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} ",0,1);
+
     $doc = "bphtb_".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
@@ -46,11 +53,17 @@
 		$gid = $_POST['gid'];
 		$kec = $_POST['kecamatan'];
 		$desa = $_POST['nama'];
-		$pph = 5/100*$_POST['njop'];
+		$nir = $_POST['nir'];
+		$tanah = $_POST['tanah'];
+		$bgn = $_POST['bgn'];
+		$pph = 5/100*(($_POST['tanah']+$_POST['bgn'])*$_POST['njop']);
 
 		$pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
 		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
 		$pdf->Cell(0,15,"PPH : Rp {$pph}",0,1);
+		$pdf->Cell(0,15,"NIR : Rp {$nir}",0,1);
+		$pdf->Cell(0,15,"Luas Tanah : {$tanah} m",0,1);
+		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} m",0,1);
 		$doc = "pph_".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
@@ -67,11 +80,18 @@
 		$gid = $_POST['gid'];
 		$kec = $_POST['kecamatan'];
 		$desa = $_POST['nama'];
+		$nir = $_POST['nir'];
+		$tanah = $_POST['tanah'];
+		$bgn = $_POST['bgn'];
 		$pbb = 1/1000*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-10000000);
 
 		$pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
 		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
 		$pdf->Cell(0,15,"PBB : Rp {$pbb}",0,1);
+		$pdf->Cell(0,15,"NIR : Rp {$nir}",0,1);
+		$pdf->Cell(0,15,"Luas Tanah : {$tanah} m",0,1);
+		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} m",0,1);
+
 		$doc = "pbb_".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');

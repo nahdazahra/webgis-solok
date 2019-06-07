@@ -60,13 +60,13 @@
 	</head>
 
 	<body onload="up206b.initialize()">
-		<div class="wrap" style="1000px">
-			<nav class="navbar-dark navbar-expand" role="navigation" style="background-color: #5cb85c">
+		<div class="wrap" style="overflow:hidden;">
+			<nav class="navbar-dark navbar-expand" role="navigation" style="background-color: #f4623a">
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index.php"><b>Peta Zona Nilai Tanah Kota Solok</b></a>
 					</div>
-					<ul class="navbar-nav navbar-right ml-auto ml-md-0">
+					<ul class="navbar-nav navbar-right active" style="padding-right: 20px">
 					<?php if (isset($_SESSION['usr_name'])) { ?>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Selamat Datang <b><?php echo $_SESSION['usr_name']; ?></b>!
@@ -82,11 +82,11 @@
 			</nav>
 			
 			<div class="body-content">
-				<ul class="sidebar navbar-nav" style="width:100%; height: 100%; overflow:auto;">
-					<div class="container" style="width:100%; height: 100%; overflow:auto; float:left; padding-right:10px;">
-						<button type="button" class="btn" data-toggle="collapse" data-target="#znt_desa">Zona Tanah tiap Kelurahan</button>
-						<div id="znt_desa" class="collapse">
-							<div class="form" name="form-update" >
+				<ul class="sidebar navbar-nav" style="width:100%;  overflow:hidden;">
+					<div class="container" style="width:100%;  overflow:hidden; float:left; padding-right:10px;">
+						<!-- <button type="button" class="btn btn-md" data-toggle="collapse" data-target="#znt_desa">Zona Tanah tiap Kelurahan</button>
+						<div id="znt_desa" class="collapse"> -->
+							<div class="form" name="form-update"  style="padding-top:10px; padding-bottom:5px;">
 								<form method="post" target="blank" action="update.php">
 									<div class="cari-nama">
 										<div style="overflow: hidden; ">
@@ -112,6 +112,7 @@
 									<input id="form-gid" type="hidden" name="gid" value=""/>
 									<input id="form-kec" type="hidden" name="kecamatan" value="" class="form-control"/>
 									<input id="form-desa" type="hidden" name="nama" value="" class="form-control"/>
+									<input id="form-nir" type="hidden" name="nir" value="" class="form-control"/>
 									<div class="form-group">
 										<label for="name">NJOP (Rp)</label>
 										<input id="form-njop" type="text" name="njop" value="" class="form-control input-sm"/>
@@ -128,6 +129,7 @@
 										<input type="submit" name="bphtb" class="btn btn-info btn-xs" value="Lihat BPHTB" />
 										<input type="submit" name="pbb" class="btn btn-info btn-xs" value="Lihat PBB" />
 										<input type="submit" name="pph" class="btn btn-info btn-xs" value="Lihat PPH" />
+										<input type="submit" name="update" class="btn btn-primary btn-xs" value="Ubah NJOP" style="float:right"/>
 									</div>
 								</form>
 							</div>
@@ -187,10 +189,10 @@
 									</div>
 								</li>
 							</div>
-						</div>
+						<!-- </div> -->
 
-						<br>
-						<button type="button" class="btn" data-toggle="collapse" data-target="#znt_persil">Zona Tanah Persil</button>
+						
+						<!-- <button type="button" class="btn" data-toggle="collapse" data-target="#znt_persil">Zona Tanah Persil</button> -->
 						<div id="znt_persil" class="collapse">
 							<div class="form" name="form-update" >
 								<form method="post" target="blank" action="update_p.php">
@@ -235,6 +237,7 @@
 										<input type="submit" name="bphtb" class="btn btn-info btn-xs" value="Lihat BPHTB" />
 										<input type="submit" name="pbb" class="btn btn-info btn-xs" value="Lihat PBB" />
 										<input type="submit" name="pph" class="btn btn-info btn-xs" value="Lihat PPH" />
+										<input type="submit" name="update" class="btn btn-primary btn-xs" value="Ubah NJOP" style="float:right"/>
 									</div>
 								</form>
 							</div>
@@ -298,7 +301,7 @@
 					</div>
 				</ul>
 
-			<div id="map" style="width: 75%;">
+			<div id="map" style="width: 75%; height:90%">
 				Map here
 			</div>
 
@@ -356,7 +359,7 @@
 					return bounds;
 				}
 
-				var transform = function(multipolygon, map, nama, q, njop, gid) {
+				var transform = function(multipolygon, map, nama, q, njop, gid, nir, tanah, bgn) {
 
 				// 	console.log(JSON.stringify(geojson, undefined, 2));
 					var bounds = new google.maps.LatLngBounds();
@@ -420,7 +423,7 @@
 					}
 
 					var myLatlng = bounds.getCenter();
-					createInfoWindow(polygon, nama, q, njop, gid, myLatlng);
+					createInfoWindow(polygon, nama, q, njop, gid, myLatlng, nir, tanah, bgn);
 					return polygon;
 				};
 
@@ -521,11 +524,11 @@
 				}
 
 				//info window wilayah
-				var createInfoWindow = function(polygon, nama, q, njop, gid, myLatlng){
+				var createInfoWindow = function(polygon, nama, q, njop, gid, myLatlng, nir, tanah, bgn){
 					infowindow = new google.maps.InfoWindow();
 					google.maps.event.addListener(polygon, 'click', function(event){
 						infowindow.close();
-						infowindow.setContent("<b>Desa/Kelurahan</b> : "+nama+"<br><b>Kecamatan</b> : "+inputname.value+"<br><b>NJOP</b> : Rp "+njop);
+						infowindow.setContent("<b>Desa/Kelurahan</b> : "+nama+"<br><b>Kecamatan</b> : "+inputname.value+"<br><b>NJOP</b> : Rp "+njop+"<br><b>NIR</b> : Rp "+nir);
 						// infowindow.setPosition(myLatlng);
 						infowindow.setPosition(event.latLng);
 						infowindow.open(map);
@@ -533,6 +536,8 @@
 						document.getElementById("form-kec").value = q;
 						document.getElementById("form-desa").value = nama;
 						document.getElementById("form-njop").value = njop;
+						document.getElementById("form-nir").value = nir;
+						
 					});
 				}
 
@@ -588,7 +593,7 @@
 								}
 								else{
 									for(i = 0; i < data['list'].length; i++) {
-										var polygon=transform(data['list'][i]['area'], map, data['list'][i]['nama'], inputname.value, data['list'][i]['njop'], data['list'][i]['gid']);
+										var polygon=transform(data['list'][i]['area'], map, data['list'][i]['nama'], inputname.value, data['list'][i]['njop'], data['list'][i]['gid'], data['list'][i]['nir'], data['list'][i]['tanah'], data['list'][i]['bgn']);
 										polygon.setMap(map);
 									}
 									map.fitBounds(polygon.getBounds());
@@ -660,11 +665,11 @@
 									document.getElementById("starts").value = "";
 									var i;
 									for(i = 0; i < data['list'].length; i++) {
-										var polygon=transform(data['list'][i]['area'], map, data['list'][i]['nama'], inputname.value, data['list'][i]['njop'], data['list'][i]['gid']);
+										var polygon=transform(data['list'][i]['area'], map, data['list'][i]['nama'], inputname.value, data['list'][i]['njop'], data['list'][i]['gid'], data['list'][i]['nir'], data['list'][i]['tanah'], data['list'][i]['bgn']);
 										polygon.setMap(map);
 									}
 
-									document.getElementById("starts").innerHTML += "<option value='' selected disabled>-- PILIH DESA --</option>";
+									document.getElementById("starts").innerHTML += "<option value='' selected disabled>Pilih Desa</option>";
 									for (i=0; i<data['nama'].length; i++) {
 										nama=data['nama'][i].nama;
 										document.getElementById("starts").innerHTML += "<option value='"+nama+"'>"+nama+"</option>";
@@ -706,7 +711,7 @@
 										polygon.setMap(map);
 									}
 
-									document.getElementById("starts2").innerHTML += "<option value='' selected disabled>-- PILIH DESA --</option>";
+									document.getElementById("starts2").innerHTML += "<option value='' selected disabled>Pilih Desa</option>";
 									for (i=0; i<data['nama'].length; i++) {
 										nama=data['nama'][i].nama;
 										document.getElementById("starts2").innerHTML += "<option value='"+nama+"'>"+nama+"</option>";

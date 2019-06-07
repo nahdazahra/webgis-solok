@@ -22,7 +22,7 @@
   }
   // desa
   if (isset($_GET['q'])){
-    $sql = "SELECT gid, nama, st_astext(geom) As area, obj_id, njop FROM znt_desa WHERE obj_id = '$q'";
+    $sql = "SELECT gid, nama, st_astext(geom) As area, obj_id, njop, nir, round(luas_tanah::numeric,3) as luas_tanah, round(luas_bangunan::numeric,3) as luas_bangunan FROM znt_desa WHERE obj_id = '$q'";
     if(isset($_GET['desa']) && $_GET['desa']){
       $sql.=" AND nama = '$desa'";
     }
@@ -81,7 +81,10 @@
             $arr[0][0][] = $koor;
           };
           $njop=$row['njop'];
-          $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$arr,'njop'=>$njop);
+          $nir=$row['nir'];
+          $tanah=$row['luas_tanah'];
+          $bgn=$row['luas_bangunan'];
+          $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$arr,'njop'=>$njop,'nir'=>$nir,'tanah'=>$tanah,'bgn'=>$bgn);
         }
       }
       else{
@@ -98,7 +101,10 @@
           $arr[0][0][] = $koor;
         };
         $njop=$row['njop'];
-        $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$arr,'njop'=>$njop);
+        $nir=$row['nir'];
+        $tanah=$row['luas_tanah'];
+        $bgn=$row['luas_bangunan'];
+        $dataarray[]=array('gid'=>$gid,'nama'=>$nama,'area'=>$arr,'njop'=>$njop,'nir'=>$nir,'tanah'=>$tanah,'bgn'=>$bgn);
       }
     }
     

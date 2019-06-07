@@ -1,6 +1,6 @@
 
 .wrap{
-  height: 648px;
+  height: 710px;
   width: 100%;
   margin: 0 auto;
 }
@@ -9,13 +9,13 @@
   font-family: sans-serif;
 }
 .wrap .body-content .sidebar{
-  background-color: #d3fbae;
+  background-color: #c1c1c1;
   float: left;
   width: 20%;
   height: 100%;
 }
-.wrap .body-content #map{
-  float: right;
+.wrap #map{
+  float: left;
   height: 100%;
 }
 
