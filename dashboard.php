@@ -50,7 +50,7 @@
 		<script src="script.js"></script>
 
 		<!-- API Google Maps -->
-		<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDggC3Ce3-IjZM2jKkzm6pXJavsIToCiB8&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDKZ_EO7i_GnSTbyGarNz8g1c6JqlXcho4&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
 		
 		<!-- API terraformer untuk generate geom ke lat-lng-->
 		<script src="https://underscorejs.org/underscore.js"></script>
