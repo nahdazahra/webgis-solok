@@ -12,7 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<meta name="author" content="">
-
+		<meta name="google-site-verification" content="n8I8xxDFhfhbbTnrfWDWqniSfLA5eN4SD8u44PBA6bQ" />
 		<!-- Custom fonts for this template-->
 		<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -50,7 +50,7 @@
 		<script src="script.js"></script>
 
 		<!-- API Google Maps -->
-		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAxgh83y8vSI1-91nTOTDiUfQUmWmpcfRU&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDggC3Ce3-IjZM2jKkzm6pXJavsIToCiB8&libraries=geometry&callback=fnToRunWhenAPILoaded"></script>
 		
 		<!-- API terraformer untuk generate geom ke lat-lng-->
 		<script src="https://underscorejs.org/underscore.js"></script>
@@ -61,7 +61,7 @@
 
 	<body onload="up206b.initialize()">
 		<div class="wrap" style="overflow:hidden;">
-			<nav class="navbar-dark navbar-expand" role="navigation" style="background-color: #f4623a">
+			<nav class="navbar-inverse navbar-expand" role="navigation" >
 				<div class="container-fluid">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index.php"><b>Peta Zona Nilai Tanah Kota Solok</b></a>
@@ -136,55 +136,55 @@
 							<div id="leftsideMenu" style="list-style-type:none">
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="0">Nilai sampai 100.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="0">Nilai sampai 100.000</button>
 										<div class="color-box" style="background-color: #d4ffd2;"></div>
 									</div>
 								</li>
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="1">Nilai 100.000 - 200.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="1">Nilai 100.000 - 200.000</button>
 										<div class="color-box" style="background-color: #d3ffa8;"></div>
 									</div>
 								</li>
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="2">Nilai 200.000 - 500.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="2">Nilai 200.000 - 500.000</button>
 										<div class="color-box" style="background-color: #abfd5d;"></div>
 									</div>
 								</li>
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="3">Nilai 500.000 - 1.000.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="3">Nilai 500.000 - 1.000.000</button>
 										<div class="color-box" style="background-color: #88ac2e;"></div>
 									</div>
 								</li>
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="4">Nilai 1.000.000 - 2.000.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="4">Nilai 1.000.000 - 2.000.000</button>
 										<div class="color-box" style="background-color: #60a93e;"></div>
 									</div>
 								</li>
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="5">Nilai 2.000.000 - 5.000.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="5">Nilai 2.000.000 - 5.000.000</button>
 										<div class="color-box" style="background-color: #5b8436;"></div>
 									</div>
 								</li>
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="6">Nilai 5.000.000 - 10.000.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="6">Nilai 5.000.000 - 10.000.000</button>
 										<div class="color-box" style="background-color: #315c2f;"></div>
 									</div>
 								</li>
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="7">Nilai 10.000.000 - 20.000.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="7">Nilai 10.000.000 - 20.000.000</button>
 										<div class="color-box" style="background-color: #5b5930;"></div>
 									</div>
 								</li>
 								<li>
 									<div class="input-color">
-										<button class="btn-success btn-clr btn-xs" type="text" style="width:100%" value="8">Nilai lebih dari 20.000.000</button>
+										<button class="btn-default btn-clr btn-xs" type="text" style="width:100%" value="8">Nilai lebih dari 20.000.000</button>
 										<div class="color-box" style="background-color: #5a3334;"></div>
 									</div>
 								</li>

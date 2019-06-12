@@ -74,63 +74,100 @@
       </div>
     </div>
   </section>
-  •	Apa yang dimaksud dengan Zona Nilai Tanah?
-Zona Nilai Tanah (ZNT) adalah area yang menggambarkan nilai tanah yang relatif sama dengan batas bersifat imajiner ataupun nyata sesuai penggunaan tanah.
-•	Apa yang dimaksud dengan NJOP?
-Menurut Undang-Undang Republik Indonesia Nomor 28 Tahun 2009, Nilai Jual Objek Pajak, yang selanjutnya disingkat NJOP, adalah harga rata-rata yang diperoleh dari transaksi jual beli yang terjadi secara wajar, dan bilamana tidak terdapat transaksi jual beli, NJOP ditentukan melalui perbandingan harga dengan objek lain yang sejenis, atau nilai perolehan baru, atau NJOP pengganti.
-•	Apa yang dimaksud  dengan BPHTB?
-Dalam Undang-Undang Republik Indonesia Nomor 20 Tahun 2000 Pasal 1, disebutkan bahwa BPHTB (Bea Perolehan Hak atas Tanah dan Bangunan) adalah pajak yang dikenakan atas perolehan hak atas tanah dan/atau bangunan.
-•	Apa yang dimaksud dengan PPh?
-Menurut Undang-Undang Republik Indonesia Nomor 7 Tahun 1983, PPh (Pajak Penghasilan) adalah pajak yang dikenakan terhadap orang pribadi atau perseorangan dan badan berkenaan dengan penghasilan yang diterima atau diperolehnya selama satu tahun pajak. Dalam website ini, PPh yang dihitung adalah PPh dari hasil penjualan tanah dan/atau bangunan.
-•	Apa yang dimaksud dengan PBB?
-Definisi PBB dalam Undang-Undang Republik Indonesia Nomor 28 Tahun 2009, Pajak Bumi dan Bangunan Perdesaan dan Perkotaan adalah pajak atas bumi dan/atau bangunan yang dimiliki, dikuasai, dan/atau dimanfaatkan oleh orang pribadi atau Badan, kecuali kawasan yang digunakan untuk kegiatan usaha perkebunan, perhutanan, dan pertambangan.
-•	Siapa yang dapat menggunakan website ini?
-Website ini dapat digunakan oleh semua orang, dan dikhususkan bagi yang akan atau sedang melakukan transaksi jual beli tanah dan/atau bangunan di Kota Solok. Dengan website ini, dapat diketahui nilai tanah di wilayah Kota Solok, berapa nilai BPHTB dan PPh yang harus dibayarkan saat membeli tanah dan/atau bangunan, serta nilai PPh yang harus dibayarkan saat menjual tanah dan/atau bangunan.
-•	Bagaimana cara menggunakan website ini?
-1.	Klik tombol “Lihat Peta” pada menu bar yang terdapat di sebelah atas halaman atau pada bagian bawah halaman ini, maka halaman peta akan terbuka.
-2.	Pilih Kecamatan pada side bar yang terdapat di sebelah kiri halaman.
-3.	Pilih Kelurahan, maka halaman peta akan langsung menuju ke kelurahan yang dipilih.
-4.	Pilih wilayah pada halaman peta, maka informasi mengenai NJOP dan NIR akan ditampilkan pada pop up.
-5.	Untuk menghitung pajak, masukkan luas tanah dan luas bangunan pada side bar yang terdapat di sebelah kiri halaman. Apabila transaksi yang dilakukan hanya tanah, masukkan angka 0 pada luas bangunan.
-6.	Pilih “Lihat BPHTB” atau “Lihat PBB” atau “Lihat PPh” tergantung nilai pajak apa yang ingin diketahui, maka nilai pajak akan ditampilkan dalam bentuk pdf yang siap di-print.
-  <!-- Services Section -->
-  <section class="page-section" id="services">
-    <div class="container">
-      <h2 class="text-center mt-0">At Your Service</h2>
-      <hr class="divider my-4">
-      <div class="row">
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="mt-5">
-            <i class="fas fa-4x fa-gem text-primary mb-4"></i>
-            <h3 class="h4 mb-2">Sturdy Themes</h3>
-            <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
+
+  <!-- FAQ Section -->
+  <section class="page-section" >
+    <div class="container page-section" id="faq">
+      <div class="accordion" id="accord">
+        <div class="card">
+          <div class="card-header" id="heading1">
+            <h4 class="mb-0">
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse1">Apa yang dimaksud dengan Zona Nilai Tanah?</button>
+            </h4>
+          </div>
+          <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accord">
+            <div class="card-body">Zona Nilai Tanah (ZNT) adalah area yang menggambarkan nilai tanah yang relatif sama dengan batas bersifat imajiner ataupun nyata sesuai penggunaan tanah.</div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="mt-5">
-            <i class="fas fa-4x fa-laptop-code text-primary mb-4"></i>
-            <h3 class="h4 mb-2">Up to Date</h3>
-            <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
+        <div class="card">
+          <div class="card-header" id="heading2">
+            <h4 class="mb-0">
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse2">Apa yang dimaksud dengan NJOP?</button>
+            </h4>
+          </div>
+          <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accord">
+            <div class="card-body">Menurut Undang-Undang Republik Indonesia Nomor 28 Tahun 2009, Nilai Jual Objek Pajak, yang selanjutnya disingkat NJOP, adalah harga rata-rata yang diperoleh dari transaksi jual beli yang terjadi secara wajar, dan bilamana tidak terdapat transaksi jual beli, NJOP ditentukan melalui perbandingan harga dengan objek lain yang sejenis, atau nilai perolehan baru, atau NJOP pengganti.</div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="mt-5">
-            <i class="fas fa-4x fa-globe text-primary mb-4"></i>
-            <h3 class="h4 mb-2">Ready to Publish</h3>
-            <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
+        <div class="card">
+          <div class="card-header" id="heading3">
+            <h4 class="mb-0">
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse3">Apa yang dimaksud dengan BPHTB?</button>
+            </h4>
+          </div>
+          <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accord">
+            <div class="card-body">Dalam Undang-Undang Republik Indonesia Nomor 20 Tahun 2000 Pasal 1, disebutkan bahwa BPHTB (Bea Perolehan Hak atas Tanah dan Bangunan) adalah pajak yang dikenakan atas perolehan hak atas tanah dan/atau bangunan.</div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 text-center">
-          <div class="mt-5">
-            <i class="fas fa-4x fa-heart text-primary mb-4"></i>
-            <h3 class="h4 mb-2">Made with Love</h3>
-            <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
+        <div class="card">
+          <div class="card-header" id="heading4">
+            <h4 class="mb-0">
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse4">Apa yang dimaksud dengan PPh?</button>
+            </h4>
+          </div>
+          <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accord">
+            <div class="card-body">Menurut Undang-Undang Republik Indonesia Nomor 7 Tahun 1983, PPh (Pajak Penghasilan) adalah pajak yang dikenakan terhadap orang pribadi atau perseorangan dan badan berkenaan dengan penghasilan yang diterima atau diperolehnya selama satu tahun pajak. Dalam website ini, PPh yang dihitung adalah PPh dari hasil penjualan tanah dan/atau bangunan.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="heading5">
+            <h4 class="mb-0">
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse5">Apa yang dimaksud dengan PBB?</button>
+            </h4>
+          </div>
+          <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accord">
+            <div class="card-body">Definisi PBB dalam Undang-Undang Republik Indonesia Nomor 28 Tahun 2009, Pajak Bumi dan Bangunan Perdesaan dan Perkotaan adalah pajak atas bumi dan/atau bangunan yang dimiliki, dikuasai, dan/atau dimanfaatkan oleh orang pribadi atau Badan, kecuali kawasan yang digunakan untuk kegiatan usaha perkebunan, perhutanan, dan pertambangan.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="heading6">
+            <h4 class="mb-0">
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse6">Siapa yang dapat menggunakan website ini?</button>
+            </h4>
+          </div>
+          <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accord">
+            <div class="card-body">Website ini dapat digunakan oleh semua orang, dan dikhususkan bagi yang akan atau sedang melakukan transaksi jual beli tanah dan/atau bangunan di Kota Solok. Dengan website ini, dapat diketahui nilai tanah di wilayah Kota Solok, berapa nilai BPHTB dan PPh yang harus dibayarkan saat membeli tanah dan/atau bangunan, serta nilai PPh yang harus dibayarkan saat menjual tanah dan/atau bangunan.</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="heading7">
+            <h4 class="mb-0">
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse7">Bagaimana cara menggunakan website ini?</button>
+            </h4>
+          </div>
+          <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accord">
+            <div class="card-body">1. Klik tombol “Lihat Peta” pada menu bar yang terdapat di sebelah atas halaman atau pada bagian bawah halaman ini, maka halaman peta akan terbuka.<br>
+2. Pilih Kecamatan pada <i>sidebar</i> yang terdapat di sebelah kiri halaman.<br>
+3. Pilih Kelurahan, maka halaman peta akan langsung menuju ke kelurahan yang dipilih.<br>
+4. Pilih wilayah pada halaman peta, maka informasi mengenai NJOP dan NIR akan ditampilkan pada pop up.<br>
+5. Untuk menghitung pajak, masukkan luas tanah dan luas bangunan pada <i>sidebar</i> yang terdapat di sebelah kiri halaman. Apabila transaksi yang dilakukan hanya tanah, masukkan angka 0 pada luas bangunan.<br>
+6. Pilih “Lihat BPHTB” atau “Lihat PBB” atau “Lihat PPh” tergantung nilai pajak apa yang ingin diketahui, maka nilai pajak akan ditampilkan dalam bentuk pdf yang siap dicetak.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
+<script>
+$('#accord').on('shown.bs.collapse', function () {
+  
+  var panel = $(this).find('.in');
+  
+  $('html, body').animate({
+        scrollTop: panel.offset().top
+  }, 500);
+  
+});
+</script>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
