@@ -328,13 +328,9 @@
 			</div>
 
 			<script>
-				
+				//tombol rentang njop
 				$('.btn-clr').click(function(){
 					getArea($(this).attr('value'));
-				});
-
-				$('.btn-clr-p').click(function(){
-					getAreaP($(this).attr('value'));
 				});
 
 				$('.select2').select2({
@@ -381,6 +377,7 @@
 					return bounds;
 				}
 
+				//tampilan znt
 				var transform = function(multipolygon, map, nama, q, njop, gid, nir, tanah, bgn) {
 
 				// 	console.log(JSON.stringify(geojson, undefined, 2));
@@ -592,6 +589,7 @@
 					map = new google.maps.Map(document.getElementById("map"), myOptions);
 				}
 
+				//tampilin warnanya znt
 				var getArea = function(color=''){
 					var markers = [];
 					var infowindow = [];
