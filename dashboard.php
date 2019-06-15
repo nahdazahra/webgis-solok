@@ -123,7 +123,7 @@
 									</div>
 									<div class="form-group">
 										<label for="name">Luas Bangunan (m<sup>2</sup>)</label>
-										<input id="form-bgn" type="text" name="bgn" value="" class="form-control input-sm"/>
+										<input id="form-bgn" type="text" name="bgn" required value="" class="form-control input-sm"/>
 									</div>
 									<div class="form-group">
 										<input type="submit" name="bphtb" class="btn btn-info btn-xs" value="Lihat BPHTB" />
@@ -537,6 +537,8 @@
 						document.getElementById("form-desa").value = nama;
 						document.getElementById("form-njop").value = njop;
 						document.getElementById("form-nir").value = nir;
+						document.getElementById("form-tanah").value = tanah;
+						document.getElementById("form-bgn").value = bgn;
 						
 					});
 				}

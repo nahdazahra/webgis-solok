@@ -3,6 +3,8 @@
 	require('config.php');
 	require("fpdf/fpdf.php");
 
+	$sat="2";
+
 	if(isset($_POST['update'])) {
 		$unjop = $_POST["njop"];
 		$ugid = $_POST["gid"];
@@ -15,7 +17,8 @@
 	}
 
 	else if (isset($_POST['bphtb'])) {
-    // Instanciation of inherited class
+		// Instanciation of inherited class
+
     $pdf = new FPDF();
     $pdf->AliasNbPages();
     $pdf->AddPage();
@@ -28,7 +31,7 @@
 		$nir = $_POST['nir'];
 		$tanah = $_POST['tanah'];
 		$bgn = $_POST['bgn'];
-    $bphtb = 5/100*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-10000000);
+    $bphtb = 5/100*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-60000000);
 
     $pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
     $pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
@@ -62,8 +65,8 @@
 		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
 		$pdf->Cell(0,15,"PPH : Rp {$pph}",0,1);
 		$pdf->Cell(0,15,"NIR : Rp {$nir}",0,1);
-		$pdf->Cell(0,15,"Luas Tanah : {$tanah} m",0,1);
-		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} m",0,1);
+		$pdf->Cell(0,15,"Luas Tanah : {$tanah} ",0,1);
+		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} ",0,1);
 		$doc = "pph_".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
@@ -89,8 +92,8 @@
 		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
 		$pdf->Cell(0,15,"PBB : Rp {$pbb}",0,1);
 		$pdf->Cell(0,15,"NIR : Rp {$nir}",0,1);
-		$pdf->Cell(0,15,"Luas Tanah : {$tanah} m",0,1);
-		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} m",0,1);
+		$pdf->Cell(0,15,"Luas Tanah : {$tanah} ",0,1);
+		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} ",0,1);
 
 		$doc = "pbb_".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
