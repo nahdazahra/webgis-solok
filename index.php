@@ -151,7 +151,7 @@
 3. Pilih Kelurahan, maka halaman peta akan langsung menuju ke kelurahan yang dipilih.<br>
 4. Pilih wilayah pada halaman peta, maka informasi mengenai NJOP dan NIR akan ditampilkan pada pop up.<br>
 5. Untuk menghitung pajak, masukkan luas tanah dan luas bangunan pada <i>sidebar</i> yang terdapat di sebelah kiri halaman. Apabila transaksi yang dilakukan hanya tanah, masukkan angka 0 pada luas bangunan.<br>
-6. Pilih “Lihat BPHTB” atau “Lihat PBB” atau “Lihat PPh” tergantung nilai pajak apa yang ingin diketahui, maka nilai pajak akan ditampilkan dalam bentuk pdf yang siap dicetak.</div>
+6. Pilih “Lihat BPHTB” atau “Lihat PPh” tergantung nilai pajak apa yang ingin diketahui, maka nilai pajak akan ditampilkan dalam bentuk pdf yang siap dicetak.</div>
           </div>
         </div>
       </div>
