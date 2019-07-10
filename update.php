@@ -26,23 +26,23 @@
 	else if (isset($_POST['bphtb'])) {
 		// Instanciation of inherited class
 
-	    $pdf = new FPDF();
-	    $pdf->AliasNbPages();
-	    $pdf->AddPage();
+		$pdf = new FPDF();
+		$pdf->AliasNbPages();
+		$pdf->AddPage();
 		$pdf->SetFont('Helvetica','B',18);
 		$pdf->Cell(0,20,"Nilai BPHTB Zona Tanah Wilayah Kota Solok",1,1);
 		
-	    $bphtb = 5/100*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-60000000);
+		$bphtb = 5/100*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-60000000);
 
-	    $pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
-	    $pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
+		$pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
+		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
 		$pdf->Cell(0,15,"Luas Tanah : {$tanah} ",0,1);
 		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} ",0,1);
 		$pdf->Cell(0,15,"NIR : Rp {$nir}",0,1);
 		$pdf->Cell(0,15,"NJOP : Rp {$njop}",0,1);	
-	    $pdf->Cell(0,15,"BPHTB : Rp {$bphtb}",0,1);
+		$pdf->Cell(0,15,"BPHTB : Rp {$bphtb}",0,1);
 
-    	$doc = "bphtb_".$gid."_".$kec."_".$desa.".pdf";
+		$doc = "bphtb_".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
 	}
@@ -52,10 +52,10 @@
 		$pdf = new FPDF();
 		$pdf->AliasNbPages();
 		$pdf->AddPage();
-    	$pdf->SetFont('Helvetica','B',18);
+		$pdf->SetFont('Helvetica','B',18);
 		$pdf->Cell(0,20,"Nilai PPH Zona Tanah Wilayah Kota Solok",1,1);
 
-		$pph = 5/100*(($_POST['tanah']+$_POST['bgn'])*$_POST['njop']);
+		$pph = 25/1000*(($_POST['tanah']+$_POST['bgn'])*$_POST['njop']);
 
 		$pdf->Cell(0,15,"Kecamatan : {$kec}",0,1);
 		$pdf->Cell(0,15,"Desa/Kelurahan : {$desa}",0,1);
@@ -63,7 +63,7 @@
 		$pdf->Cell(0,15,"Luas Bangunan : {$bgn} ",0,1);
 		$pdf->Cell(0,15,"NIR : Rp {$nir}",0,1);
 		$pdf->Cell(0,15,"NJOP : Rp {$njop}",0,1);
-		$pdf->Cell(0,15,"PPH : Rp {$pph}",0,1);
+		$pdf->Cell(0,15,"PPh : Rp {$pph}",0,1);
 		$doc = "pph_".$gid."_".$kec."_".$desa.".pdf";
 		$doc = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $doc);
 		$pdf->Output($doc, 'I');
@@ -74,7 +74,7 @@
 		$pdf = new FPDF();
 		$pdf->AliasNbPages();
 		$pdf->AddPage();
-    	$pdf->SetFont('Helvetica','B',18);
+		$pdf->SetFont('Helvetica','B',18);
 		$pdf->Cell(0,20,"Nilai PBB Zona Tanah Wilayah Kota Solok",1,1);
 
 		$pbb = 1/1000*((($_POST['tanah']+$_POST['bgn'])*$_POST['njop'])-10000000);

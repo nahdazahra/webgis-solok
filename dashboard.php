@@ -73,6 +73,7 @@
 								<i class="fas fa-user-circle fa-fw"></i>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+								<a class="dropdown-item" role="button" data-toggle="modal" data-target="#id01" >Ubah Password</a>
 								<a class="dropdown-item" href="logout.php">Logout</a>
 							</div>
 						</li>
@@ -80,7 +81,34 @@
 					</ul>
 				</div>
 			</nav>
-			
+
+			<div id="id01" class="modal fade" aria-labelledby="myModalLabel" aria-hidden="true" tabindex="-1" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Ubah Password Administrator</h4>
+						</div>
+						<div class="modal-body" id="myModalBody1">
+							<form role="form" method="post" action="ch_password.php">
+								<fieldset>
+									<div class="form-group">
+										<label for="name">Password</label>
+										<input type="password" name="password" placeholder="Masukkan Password Baru" value="" required class="form-control"/>
+									</div>
+									<div class="form-group">
+										<label for="name">Konfirmasi Password</label>
+										<input type="password" name="cpassword" placeholder="Konfirmasi Password Baru" value="" required class="form-control"/>
+									</div>
+									<div class="form-group">
+										<input type="submit" name="ch_pass" class="btn btn-primary" value="Ubah Password"/>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="body-content">
 				<ul class="sidebar navbar-nav" style="width:100%;  overflow:hidden;">
 					<div class="container" style="width:100%;  overflow:hidden; float:left; padding-right:10px;">
@@ -128,7 +156,7 @@
 									<div class="form-group">
 										<input type="submit" name="bphtb" class="btn btn-info btn-xs" value="Lihat BPHTB" />
 										<!-- <input type="submit" name="pbb" class="btn btn-info btn-xs" value="Lihat PBB" /> -->
-										<input type="submit" name="pph" class="btn btn-info btn-xs" value="Lihat PPH" />
+										<input type="submit" name="pph" class="btn btn-info btn-xs" value="Lihat PPh" />
 										<input type="submit" name="update" class="btn btn-primary btn-xs" value="Ubah NJOP" style="float:right"/>
 									</div>
 								</form>
@@ -236,7 +264,7 @@
 									<div class="form-group">
 										<input type="submit" name="bphtb" class="btn btn-info btn-xs" value="Lihat BPHTB" />
 										<!-- <input type="submit" name="pbb" class="btn btn-info btn-xs" value="Lihat PBB" /> -->
-										<input type="submit" name="pph" class="btn btn-info btn-xs" value="Lihat PPH" />
+										<input type="submit" name="pph" class="btn btn-info btn-xs" value="Lihat PPh" />
 										<input type="submit" name="update" class="btn btn-primary btn-xs" value="Ubah NJOP" style="float:right"/>
 									</div>
 								</form>
@@ -304,6 +332,13 @@
 			<div id="map" style="width: 75%; height:90%">
 				Map here
 			</div>
+			<script language='javascript'>
+				<?php if ($error) { ?>
+				window.onload = function() {
+						alert('<?php echo $error?>');
+				}        
+				<?php } ?>
+			</script>
 
 			<script>
 				

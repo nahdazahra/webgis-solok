@@ -259,7 +259,7 @@
 									<div class="form-group">
 										<input type="submit" name="bphtb" class="btn btn-info btn-xs" value="Lihat BPHTB" />
 										<!-- <input type="submit" name="pbb" class="btn btn-info btn-xs" value="Lihat PBB" /> -->
-										<input type="submit" name="pph" class="btn btn-info btn-xs" value="Lihat PPH" />
+										<input type="submit" name="pph" class="btn btn-info btn-xs" value="Lihat PPh" />
 									</div>
 								</form>
 							</div>

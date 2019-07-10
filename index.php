@@ -68,7 +68,7 @@
         <div class="col-lg-8 text-center">
           <h2 class="text-white mt-0">Selamat datang di Website Peta Zona Nilai Tanah Kota Solok!</h2>
           <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">Di sini Anda dapat menghitung Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB), Pajak Penghasilan (PPh), serta Pajak Bumi dan Bangunan (PBB) yang harus dibayarkan ketika melakukan transaksi jual beli tanah dan/atau bangunan di Kota Solok, Sumatera Barat. Anda juga dapat mengetahui kisaran harga tanah di daerah tersebut lho, sehingga dapat memperkirakan berapa biaya yang harus dikeluarkan untuk membeli tanah dan membayar pajak di daerah tersebut. Selamat mencoba dan semoga membantu!</p>
+          <p class="text-white-50 mb-4">Di sini Anda dapat menghitung Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB) serta Pajak Penghasilan (PPh) yang harus dibayarkan ketika melakukan transaksi jual beli tanah dan/atau bangunan di Kota Solok, Sumatera Barat. Anda juga dapat mengetahui kisaran harga tanah di daerah tersebut lho, sehingga dapat memperkirakan berapa biaya yang harus dikeluarkan untuk membeli tanah dan membayar pajak di daerah tersebut. Selamat mencoba dan semoga membantu!</p>
           <a class="btn btn-light btn-xl js-scroll-trigger" href="main.php">Lihat Peta</a>
         </div>
       </div>
@@ -117,16 +117,6 @@
           </div>
           <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accord">
             <div class="card-body">Menurut Undang-Undang Republik Indonesia Nomor 7 Tahun 1983, PPh (Pajak Penghasilan) adalah pajak yang dikenakan terhadap orang pribadi atau perseorangan dan badan berkenaan dengan penghasilan yang diterima atau diperolehnya selama satu tahun pajak. Dalam website ini, PPh yang dihitung adalah PPh dari hasil penjualan tanah dan/atau bangunan.</div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header" id="heading5">
-            <h4 class="mb-0">
-              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse5">Apa yang dimaksud dengan PBB?</button>
-            </h4>
-          </div>
-          <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accord">
-            <div class="card-body">Definisi PBB dalam Undang-Undang Republik Indonesia Nomor 28 Tahun 2009, Pajak Bumi dan Bangunan Perdesaan dan Perkotaan adalah pajak atas bumi dan/atau bangunan yang dimiliki, dikuasai, dan/atau dimanfaatkan oleh orang pribadi atau Badan, kecuali kawasan yang digunakan untuk kegiatan usaha perkebunan, perhutanan, dan pertambangan.</div>
           </div>
         </div>
         <div class="card">
