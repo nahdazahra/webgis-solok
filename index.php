@@ -66,9 +66,9 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
-          <h2 class="text-white mt-0">Selamat datang di Website Peta Zona Nilai Tanah Kota Solok!</h2>
+          <h2 class="text-black mt-0">Selamat datang di Website Peta Zona Nilai Tanah Kota Solok!</h2>
           <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">Di sini Anda dapat menghitung Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB) serta Pajak Penghasilan (PPh) yang harus dibayarkan ketika melakukan transaksi jual beli tanah dan/atau bangunan di Kota Solok, Sumatera Barat. Anda juga dapat mengetahui kisaran harga tanah di daerah tersebut lho, sehingga dapat memperkirakan berapa biaya yang harus dikeluarkan untuk membeli tanah dan membayar pajak di daerah tersebut. Selamat mencoba dan semoga membantu!</p>
+          <p class="text-black-50 mb-4">Di sini Anda dapat menghitung Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB) serta Pajak Penghasilan (PPh) yang harus dibayarkan ketika melakukan transaksi jual beli tanah dan/atau bangunan di Kota Solok, Sumatera Barat. Anda juga dapat mengetahui kisaran harga tanah di daerah tersebut lho, sehingga dapat memperkirakan berapa biaya yang harus dikeluarkan untuk membeli tanah dan membayar pajak di daerah tersebut. Selamat mencoba dan semoga membantu!</p>
           <a class="btn btn-light btn-xl js-scroll-trigger" href="main.php">Lihat Peta</a>
         </div>
       </div>
@@ -82,7 +82,7 @@
         <div class="card">
           <div class="card-header" id="heading1">
             <h4 class="mb-0">
-              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse1">Apa yang dimaksud dengan Zona Nilai Tanah?</button>
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse1" style="color: #000000">Apa yang dimaksud dengan Zona Nilai Tanah?</button>
             </h4>
           </div>
           <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accord">
@@ -92,7 +92,7 @@
         <div class="card">
           <div class="card-header" id="heading2">
             <h4 class="mb-0">
-              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse2">Apa yang dimaksud dengan NJOP?</button>
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse2" style="color: #000000">Apa yang dimaksud dengan NJOP?</button>
             </h4>
           </div>
           <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accord">
@@ -102,7 +102,7 @@
         <div class="card">
           <div class="card-header" id="heading3">
             <h4 class="mb-0">
-              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse3">Apa yang dimaksud dengan BPHTB?</button>
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse3" style="color: #000000">Apa yang dimaksud dengan BPHTB?</button>
             </h4>
           </div>
           <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accord">
@@ -112,7 +112,7 @@
         <div class="card">
           <div class="card-header" id="heading4">
             <h4 class="mb-0">
-              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse4">Apa yang dimaksud dengan PPh?</button>
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse4" style="color: #000000">Apa yang dimaksud dengan PPh?</button>
             </h4>
           </div>
           <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accord">
@@ -122,7 +122,7 @@
         <div class="card">
           <div class="card-header" id="heading6">
             <h4 class="mb-0">
-              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse6">Siapa yang dapat menggunakan website ini?</button>
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse6" style="color: #000000">Siapa yang dapat menggunakan website ini?</button>
             </h4>
           </div>
           <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accord">
@@ -132,7 +132,7 @@
         <div class="card">
           <div class="card-header" id="heading7">
             <h4 class="mb-0">
-              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse7">Bagaimana cara menggunakan website ini?</button>
+              <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapse7" style="color: #000000">Bagaimana cara menggunakan website ini?</button>
             </h4>
           </div>
           <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accord">
