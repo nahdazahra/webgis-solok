@@ -22,7 +22,7 @@
   }
   // desa
   if (isset($_GET['q'])){
-    $sql = "SELECT gid, nama, st_astext(geom) As area, obj_id, njop, nir, round(luas_tanah::numeric,3) as luas_tanah, round(luas_bangunan::numeric,3) as luas_bangunan FROM znt_desa WHERE obj_id = '$q'";
+    $sql = "SELECT gid, nama, st_astext(geom) As area, obj_id, njop, cast(cast(nir as double precision) as int8) as nir, round(luas_tanah::numeric,3) as luas_tanah, round(luas_bangunan::numeric,3) as luas_bangunan FROM znt_desa WHERE obj_id = '$q'";
     if(isset($_GET['desa']) && $_GET['desa']){
       $sql.=" AND nama = '$desa'";
     }
